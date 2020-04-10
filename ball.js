@@ -39,8 +39,11 @@ createDataArr = ()=>{
 				 if (searchResultSize == 1){// if that player exists
 					 
 					 
-					 getAnnualStats(json.data[0]["id"], curSeason, yearlyPts);
+					 yearlyPts = getAnnualStats(json.data[0]["id"], curSeason, yearlyPts);
+					 console.log("Here" + yearlyPts);
 					 
+					 transferData(yearlyPts, dataArr, curSeason);
+
 					 
 				 }
 				 else if(searchResultSize == 0){// need to account for CASE that name/id does not exist
@@ -80,11 +83,9 @@ getStats = (playerID, curSeason, yearlyPts) => {
 	fetch(newApi)
 		.then(response => {  return response.json() } ) 
 		.then(  json => {
-// 			console.log(json.data[0]["pts"]);
-		
 		returnable =  json.data[0]["pts"];
 		yearlyPts.push(returnable);
-		console.log("returnable is " + returnable);
+// 		console.log("returnable is " + returnable);
 // 		return returnable;
 		})
 	
@@ -92,22 +93,34 @@ getStats = (playerID, curSeason, yearlyPts) => {
 
 getAnnualStats = (playerID, curSeason, yearlyPts) =>{
 	// gonna returns an array of whatever stats you want, for know using pts
-	
+// 	var annualPts;
 	
 	var tempX ;
 	for(var i = curSeason; i > 2011; i--){
-// 		tempX = getStats(playerID, i);
-// 		console.log("tempX is " + tempX);
-// 		yearlyPts.push(getStats(playerID, i));
 		getStats(playerID, i, yearlyPts)
 	}
 	
 	console.log(yearlyPts);
+	console.log("yearlyPts length is " + yearlyPts["length"] );
 	return yearlyPts;
 }
 
-transferData = () =>{
-	
+transferData = (yearlyPts, dataArr, curSeason) =>{
+	// I really like this function, but if the overall app is too slow will do the shorter way of creating 2d array
+	var i = 0 ;
+	curSeason = 2019;
+	tempArr = [];
+	var yearString;
+	console.log(yearlyPts.length + "# length");
+	for (i = 0 ; i < yearlyPts.length; ++i ){
+			console.log("Enters the loop")
+			yearString = curSeason.toString();
+			tempArr = [yearString, yearlyPts[i]];
+			dataArr.push(tempArr);
+			curSeason = curSeason - 1;
+	}
+	console.log(dataArr);
+	return dataArr;
 	
 }
 	//"https://www.balldontlie.io/api/v1/season_averages?season=2018&player_ids[]=1&player_ids[]=2";
@@ -123,12 +136,6 @@ transferData = () =>{
 	
 	//"https://www.balldontlie.io/api/v1/players?search=davis?search=anthony";
 
-// GETTING FIRST 5 Player - doesnt work for getting BIG VALUES
-// var i = 1;
-// while(i < 5){
-// 	
-// 	i++;
-// }
 	 
       google.charts.load('current', {'packages':['corechart']});
       google.charts.setOnLoadCallback(drawChart);
