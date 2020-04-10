@@ -1,28 +1,27 @@
-// Once the user hits 'Find Player' use API of players with search filter
-// 	need to find way to check json/array size
-// 	if json returns 1 - player found so retrieve their ID
-// 	if json is size 0 - not found
-// 	if json is more than one, give user a list of options
-	
-// if json returns size 1 and we have the ID
-// 	now we use the season averages data, starting with current year 2019, and subtract one 
-// 	and if undefined means returns that means the  year before was their rookie season
-	
-	
-// 	need buttons for options - pts, rebs, assts, fg%, 3pt%, 
-// 	need to learn how to make a chart video of Hayes
 // 		I KNOW I CAN DO THIS
 
 let apiEndpoint = "https://www.balldontlie.io/api/v1/players";
 
-var curSeason = 2019;
-	///?search=lebron_james - UNDERSCORE WORKS
+var curSeason = 2019;	//?search=lebron_james - UNDERSCORE WORKS
 
 var playerID;
-var desiredStats = ["pts", "reb", "ast"];
+var desiredStats = ["pts", "reb", "ast"];// need buttons linked to options - pts, rebs, assts, fg%, 3pt%, 
+
+var dataArr = [] ;
+// The second element will depend on which button is clicked, points is the default
+dataArr.push(["Year", "Points"]);
+console.log(dataArr);
+var yearlyPts = [];
 //finding ID from whatever string/player name user enters and presses click
 
 document.getElementById("findPlayer").addEventListener("click",  (e)=> {
+				createDataArr();
+ 
+ })
+
+
+
+createDataArr = ()=>{
 	 let pName = document.getElementById("text-field-hero-input").value;
 	
 	// remove the space between first and last name and put underscore for search purposes
@@ -38,16 +37,29 @@ document.getElementById("findPlayer").addEventListener("click",  (e)=> {
 				console.log(json);
 				var searchResultSize = json.meta["total_count"];
 				 if (searchResultSize == 1){// if that player exists
-					 getAnnualStats(json.data[0]["id"], curSeason);// REPLACE THIS CALL 
+					 
+					 
+					 getAnnualStats(json.data[0]["id"], curSeason, yearlyPts);
+					 
+					 
+				 }
+				 else if(searchResultSize == 0){// need to account for CASE that name/id does not exist
+					 console.log("Whoops, player does not exist");
+					 // do a different search with the name before or aftr the space - 
+					 // make a different space function for that 
+					 // then ask did u mean???  and these players names
+				 }
+				 else{
+					 console.log("Multiple players with this name exist, further action required");
+					 // 	if json is more than one, give user a list of options
 				 }
 				 
-				
-			    
-				 // need to account for CASE that name/id does not exist
 				 
 		})
- 
- })
+	
+}
+
+
 
 function spaceRemover(pName){
 	if( pName.includes(" ") == true ){
@@ -59,47 +71,51 @@ function spaceRemover(pName){
 }
 
 
-
-
-//working to get STATS FROM MULTIPLE SEASONS
-
-
-function getStats(playerID, curSeason){
+getStats = (playerID, curSeason, yearlyPts) => {
 	var returnable;
-let newApi = "https://www.balldontlie.io/api/v1/season_averages/" + "?season=" + curSeason
+	let newApi = "https://www.balldontlie.io/api/v1/season_averages/" 
+			+ "?season=" + curSeason
 			+ "&player_ids[]=" + playerID ;
-	console.log(newApi);
+// 	console.log(newApi);
 	fetch(newApi)
-		.then(response => {
-		return response.json()   
-		} ) 
+		.then(response => {  return response.json() } ) 
 		.then(  json => {
-			// MAKE A LOOP HERE THAT CONTINUES UNTIL !== undefined keep subtracting year, probably have 
-			// 2005 as the lowpoint for now 
-			// if json == UNDEFINED??
-			console.log(json.data[0]["pts"]);
-			returnable=  json.data[0]["pts"];
+// 			console.log(json.data[0]["pts"]);
+		
+		returnable =  json.data[0]["pts"];
+		yearlyPts.push(returnable);
+		console.log("returnable is " + returnable);
+// 		return returnable;
 		})
-	return returnable;
+	
 }
 
-function getAnnualStats(playerID, curSeason){
+getAnnualStats = (playerID, curSeason, yearlyPts) =>{
 	// gonna returns an array of whatever stats you want, for know using pts
-	var yearlyPts = [];
+	
+	
+	var tempX ;
 	for(var i = curSeason; i > 2011; i--){
-		yearlyPts.push(getStats(playerID, i));
+// 		tempX = getStats(playerID, i);
+// 		console.log("tempX is " + tempX);
+// 		yearlyPts.push(getStats(playerID, i));
+		getStats(playerID, i, yearlyPts)
 	}
+	
 	console.log(yearlyPts);
 	return yearlyPts;
-// 	
+}
+
+transferData = () =>{
+	
+	
 }
 	//"https://www.balldontlie.io/api/v1/season_averages?season=2018&player_ids[]=1&player_ids[]=2";
 	
 //ok from my understand use the name and player api to find the ID
 //then use the ID to get statistics and parameters are specified 
 //
-//IDEAS
-//Stat Comparer
+//IDEASStat Comparer
 //Or single player line graphs to show progression, should x axis be age or be season?
 	//"https://www.balldontlie.io/api/v1/season_averages?player_ids[]=237";
 	
@@ -113,6 +129,28 @@ function getAnnualStats(playerID, curSeason){
 // 	
 // 	i++;
 // }
+	 
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
 
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable(
+		[
+          ['Year', 'Points'],
+          ["2004",  1000],
+          ["2005",  1170],
+          ["2006",  660],
+          ["2007",  1030]
+        ]
+		);
 
+        var options = {
+          title: 'Stats per Season',
+          curveType: 'function',
+          legend: { position: 'bottom' }
+        };
 
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+        chart.draw(data, options);
+      }
