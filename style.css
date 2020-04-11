@@ -1,0 +1,12 @@
+.mdc-button:not(:disabled) {
+    color: #2d3436;
+}
+
+/* .mdc-button--outlined{
+	color:#2d3436;
+} */
+
+body{
+/* 	background-color:#F8EFBA;	 */
+background-color: #74b9ff;
+}

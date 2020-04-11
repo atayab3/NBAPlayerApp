@@ -1,50 +1,67 @@
-// 		I KNOW I CAN DO THIS
+
+// The second element will depend on which button is clicked, points is the default
+
+
+
+
 
 let apiEndpoint = "https://www.balldontlie.io/api/v1/players";
-
 var curSeason = 2019;	//?search=lebron_james - UNDERSCORE WORKS
 
-var playerID;
-var desiredStats = ["pts", "reb", "ast"];// need buttons linked to options - pts, rebs, assts, fg%, 3pt%, 
+var dataArr = [] ; // 2D Array for chart data
+dataArr.push(['Year', 'Points']); // doesn't have to be Points, will have buttons that choose the stat
+var yearlyPts = []; // the specific stat per year that feeds the 2D Array
+var urlArray = []; // all the urls to fetchALL promise shit
 
-var dataArr = [] ;
-// The second element will depend on which button is clicked, points is the default
-dataArr.push(["Year", "Points"]);
-console.log(dataArr);
-var yearlyPts = [];
-//finding ID from whatever string/player name user enters and presses click
+
 
 document.getElementById("findPlayer").addEventListener("click",  (e)=> {
 				createDataArr();
- 
+				console.log("In main-ish area");
+				console.log(dataArr);
+				google.charts.load('current', {'packages':['corechart']});
+				google.charts.setOnLoadCallback(drawChart );
+	
+	
+	// Need to disable button or go to next screen
+	//document.getElementById('save').setAttribute('mydata','myData'); 
  })
-
-
 
 createDataArr = ()=>{
 	 let pName = document.getElementById("text-field-hero-input").value;
-	
+	 var playerID;
 	// remove the space between first and last name and put underscore for search purposes
 	 pName = spaceRemover(pName); 
 	 
 	 let nbaApi = apiEndpoint + "/?search=" + pName;
-	 console.log(nbaApi);
+	
 	 fetch(nbaApi)
-		.then(response => {
-		return response.json()   
-		} ) 
+		.then(response => {return response.json()   } ) 
 		.then(  json => {
-				console.log(json);
+// 				console.log(json);
 				var searchResultSize = json.meta["total_count"];
 				 if (searchResultSize == 1){// if that player exists
 					 
+					 playerID = json.data[0]["id"];
+					 getUrls(playerID, curSeason, urlArray);
+// 					 console.log(urlArray); // all the urls for api Endpoints
 					 
-					 yearlyPts = getAnnualStats(json.data[0]["id"], curSeason, yearlyPts);
-					 console.log("Here" + yearlyPts);
 					 
-					 transferData(yearlyPts, dataArr, curSeason);
+					 fetchData(urlArray).then (responses => {
+						
+// 						console.log("the array of responses",responses);
+						seeIfTakeInResponses(responses, dataArr);
+						
+						 dataArr = dataArr.reverse();
+// 						 console.log(dataArr);
+// 						  let p1 = document.createElement("p");
+// 						  p1.textContent = dataArr;
+// 						  document.getElementById("arrayHere").appendChild(p1);
 
-					 
+					})
+ 
+// 					 transferData(yearlyPts, dataArr, curSeason);
+
 				 }
 				 else if(searchResultSize == 0){// need to account for CASE that name/id does not exist
 					 console.log("Whoops, player does not exist");
@@ -52,19 +69,68 @@ createDataArr = ()=>{
 					 // make a different space function for that 
 					 // then ask did u mean???  and these players names
 				 }
-				 else{
-					 console.log("Multiple players with this name exist, further action required");
-					 // 	if json is more than one, give user a list of options
+				 else{ // 	if json is more than one, give user a list of options
+					 console.log("Multiple players with this name exist, further action required");					
 				 }
-				 
-				 
 		})
-	
 }
 
+seeIfTakeInResponses = (respondent, dataTwoDArray) =>{
+	var tempArr = [];
+	console.log("inside helper function");
+// 	console.log(respondent.length);
+	for(var x = 0; x < respondent.length; x++){		
+		var curYear = respondent[x].data[0]["season"];
+		var curYearString = curYear.toString();
+		var curStat = respondent[x].data[0]["pts"];
+		tempArr = [curYearString, curStat];
+		dataTwoDArray.unshift(tempArr);
+		
+	}
+	
+} 
+
+// transferData = (yearlyPts, dataArr, curSeason) =>{
+// 	// I really like this function, but if the overall app is too slow will do the shorter way of creating 2d array
+// 	var i = 0 ;
+// 	curSeason = 2019;
+// 	tempArr = [];
+// 	var yearString;
+// 	console.log(yearlyPts.length + "# length");
+// 	for (i = 0 ; i < yearlyPts.length; ++i ){
+// 			console.log("Enters the loop")
+// 			yearString = curSeason.toString();
+// 			tempArr = [yearString, yearlyPts[i]];
+// 			dataArr.push(tempArr);
+// 			curSeason = curSeason - 1;
+// 	}
+// 	console.log(dataArr);
+// 	return dataArr;
+	
+// }
 
 
-function spaceRemover(pName){
+
+getUrls = (playerId, curSeason, urlArr) =>{
+	var newApi; 
+	var i =0;
+	for(i = curSeason ; i > 2010; i--){
+		newApi = "https://www.balldontlie.io/api/v1/season_averages/" 
+			+ "?season=" + i
+			+ "&player_ids[]=" + playerId ;
+		urlArr.unshift(newApi);
+	}
+}
+
+//Function from Hayes
+fetchData = (urlsArr) => {
+  const allRequests = urlsArr.map(url => 
+    fetch(url).then(response => response.json())
+  );
+  return Promise.all(allRequests);
+};
+        
+spaceRemover = (pName) =>{
 	if( pName.includes(" ") == true ){
 		var newName = pName.replace(" ", "_");
 	}
@@ -73,56 +139,45 @@ function spaceRemover(pName){
 	return newName;
 }
 
+// const hideViews = () => {
+//       document.querySelectorAll(div) {//.forEach( (item) => {
+//         item.style.display = "none";
+//       }
+    
+// getStats = (playerID, curSeason, tempArr) => {
+// 	var returnable;
+// 	let newApi = "https://www.balldontlie.io/api/v1/season_averages/" 
+// 			+ "?season=" + curSeason
+// 			+ "&player_ids[]=" + playerID ;
+// // 	console.log(newApi);
+// 	fetch(newApi)
+// 		.then(response => {  return response.json() } ) 
+	
+// 		.then(  json => {
+// 		returnable =  json.data[0]["pts"];
+		
+// 		tempArr.push(returnable);
+// // 		console.log("returnable is " + returnable);
+// 		})
 
-getStats = (playerID, curSeason, yearlyPts) => {
-	var returnable;
-	let newApi = "https://www.balldontlie.io/api/v1/season_averages/" 
-			+ "?season=" + curSeason
-			+ "&player_ids[]=" + playerID ;
-// 	console.log(newApi);
-	fetch(newApi)
-		.then(response => {  return response.json() } ) 
-		.then(  json => {
-		returnable =  json.data[0]["pts"];
-		yearlyPts.push(returnable);
-// 		console.log("returnable is " + returnable);
-// 		return returnable;
-		})
-	
-}
+// }
 
-getAnnualStats = (playerID, curSeason, yearlyPts) =>{
-	// gonna returns an array of whatever stats you want, for know using pts
-// 	var annualPts;
-	
-	var tempX ;
-	for(var i = curSeason; i > 2011; i--){
-		getStats(playerID, i, yearlyPts)
-	}
-	
-	console.log(yearlyPts);
-	console.log("yearlyPts length is " + yearlyPts["length"] );
-	return yearlyPts;
-}
+// getAnnualStats = (playerID, curSeason) =>{
+// 	// gonna returns an array of whatever stats you want, for know using pts
+// // 	var annualPts;
+// 	let tempArr = []; // let defines blck scope var
+// 	var tempX ;
+// 	for(var i = curSeason; i > 2011; i--){
+// 		getStats(playerID, i, tempArr)
+// 	}//need to wait till all have been retreived 
+// 	asynchronous 
+// 	console.log(tempArr);
+// 	console.log("tempArr length is " + tempArr["length"] );
+// 	return tempArr;
+// }
 
-transferData = (yearlyPts, dataArr, curSeason) =>{
-	// I really like this function, but if the overall app is too slow will do the shorter way of creating 2d array
-	var i = 0 ;
-	curSeason = 2019;
-	tempArr = [];
-	var yearString;
-	console.log(yearlyPts.length + "# length");
-	for (i = 0 ; i < yearlyPts.length; ++i ){
-			console.log("Enters the loop")
-			yearString = curSeason.toString();
-			tempArr = [yearString, yearlyPts[i]];
-			dataArr.push(tempArr);
-			curSeason = curSeason - 1;
-	}
-	console.log(dataArr);
-	return dataArr;
-	
-}
+
+
 	//"https://www.balldontlie.io/api/v1/season_averages?season=2018&player_ids[]=1&player_ids[]=2";
 	
 //ok from my understand use the name and player api to find the ID
@@ -137,19 +192,12 @@ transferData = (yearlyPts, dataArr, curSeason) =>{
 	//"https://www.balldontlie.io/api/v1/players?search=davis?search=anthony";
 
 	 
-      google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawChart);
+      
 
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable(
-		[
-          ['Year', 'Points'],
-          ["2004",  1000],
-          ["2005",  1170],
-          ["2006",  660],
-          ["2007",  1030]
-        ]
-		);
+
+
+      drawChart = ()=> {
+        var data = google.visualization.arrayToDataTable(dataArr);
 
         var options = {
           title: 'Stats per Season',
