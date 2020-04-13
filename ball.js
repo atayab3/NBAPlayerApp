@@ -1,4 +1,3 @@
-
 // The second element will depend on which button is clicked, points is the default
 
 
@@ -9,7 +8,7 @@ let apiEndpoint = "https://www.balldontlie.io/api/v1/players";
 var curSeason = 2019;	//?search=lebron_james - UNDERSCORE WORKS
 
 var dataArr = [] ; // 2D Array for chart data
-dataArr.push(['Year', 'Points']); // doesn't have to be Points, will have buttons that choose the stat
+ // doesn't have to be Points, will have buttons that choose the stat
 var yearlyPts = []; // the specific stat per year that feeds the 2D Array
 var urlArray = []; // all the urls to fetchALL promise shit
 
@@ -17,10 +16,14 @@ var urlArray = []; // all the urls to fetchALL promise shit
 
 document.getElementById("findPlayer").addEventListener("click",  (e)=> {
 				createDataArr();
-				console.log("In main-ish area");
+				console.log("array of Data is:");
 				console.log(dataArr);
-				google.charts.load('current', {'packages':['corechart']});
-				google.charts.setOnLoadCallback(drawChart );
+				console.log("checking first element");
+				console.log(dataArr[0]);
+				console.log("checking 2nd elemesnt");
+				console.log(dataArr[1]);
+				console.log(dataArr);
+				
 	
 	
 	// Need to disable button or go to next screen
@@ -43,16 +46,24 @@ createDataArr = ()=>{
 				 if (searchResultSize == 1){// if that player exists
 					 
 					 playerID = json.data[0]["id"];
-					 getUrls(playerID, curSeason, urlArray);
+					 urlArray = getUrls(playerID, curSeason);
 // 					 console.log(urlArray); // all the urls for api Endpoints
 					 
 					 
 					 fetchData(urlArray).then (responses => {
 						
 // 						console.log("the array of responses",responses);
-						seeIfTakeInResponses(responses, dataArr);
+					    dataArr= seeIfTakeInResponses(responses);
 						
 						 dataArr = dataArr.reverse();
+						 console.log("IN IF STATEMENT -- array of Data is:");
+						console.log(dataArr);
+						console.log("checking first element");
+						console.log(dataArr[0]);
+						console.log("IN IF STATEMENT -- checking 2nd elemesnt");
+						console.log(dataArr[1]);
+						 google.charts.load('current', {'packages':['corechart']});
+						google.charts.setOnLoadCallback(drawChart );
 // 						 console.log(dataArr);
 // 						  let p1 = document.createElement("p");
 // 						  p1.textContent = dataArr;
@@ -75,8 +86,10 @@ createDataArr = ()=>{
 		})
 }
 
-seeIfTakeInResponses = (respondent, dataTwoDArray) =>{
+seeIfTakeInResponses = (respondent) =>{
 	var tempArr = [];
+	var  dataTwoDArray = [];
+	dataTwoDArray.push(['Year', 'Points']);
 	console.log("inside helper function");
 // 	console.log(respondent.length);
 	for(var x = 0; x < respondent.length; x++){		
@@ -87,6 +100,7 @@ seeIfTakeInResponses = (respondent, dataTwoDArray) =>{
 		dataTwoDArray.unshift(tempArr);
 		
 	}
+	return dataTwoDArray;
 	
 } 
 
@@ -111,15 +125,17 @@ seeIfTakeInResponses = (respondent, dataTwoDArray) =>{
 
 
 
-getUrls = (playerId, curSeason, urlArr) =>{
+getUrls = (playerId, curSeason ) =>{
 	var newApi; 
 	var i =0;
+	var urlArr = [];
 	for(i = curSeason ; i > 2010; i--){
 		newApi = "https://www.balldontlie.io/api/v1/season_averages/" 
 			+ "?season=" + i
 			+ "&player_ids[]=" + playerId ;
 		urlArr.unshift(newApi);
 	}
+	return urlArr;
 }
 
 //Function from Hayes
@@ -198,10 +214,11 @@ spaceRemover = (pName) =>{
 
       drawChart = ()=> {
         var data = google.visualization.arrayToDataTable(dataArr);
-
+		console.log("In draw chart, data is:");
+		console.log(data);
         var options = {
           title: 'Stats per Season',
-          curveType: 'function',
+//           curveType: 'function',
           legend: { position: 'bottom' }
         };
 
