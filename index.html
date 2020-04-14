@@ -6,7 +6,12 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width">
 	<title>Project Practice</title>
-<!-- 	 QUICK START CDN-->
+	
+	 <!-- Include Dexie -->
+      <script src="https://unpkg.com/dexie@latest/dist/dexie.js"></script>
+	
+	
+<!-- 	 MATERIAL QUICK START CDN-->
 	 <link href="https://unpkg.com/material-components-web@v4.0.0/dist/material-components-web.min.css" rel="stylesheet">
  	 <script src="https://unpkg.com/material-components-web@v4.0.0/dist/material-components-web.min.js"></script>
 	
@@ -24,13 +29,14 @@
 
 <body>
 <!-- 	 Step 1. Ask for Name of Player or Players-->
-	<div class="row">
+	<div id="searchScreen" class="row">
+		
 <div id="nameSearch" class="mdc-text-field mdc-text-field--outlined">
   <input class="mdc-text-field__input" id="text-field-hero-input">
   <div class="mdc-notched-outline">
     <div class="mdc-notched-outline__leading"></div>
     <div class="mdc-notched-outline__notch">
-      <label for="text-field-hero-input" class="mdc-floating-label">Player Name</label>
+      <label for="text-field-hero-input" class="mdc-floating-label"></label>
     </div>
     <div class="mdc-notched-outline__trailing"></div>
   </div>
@@ -42,10 +48,15 @@
   <div class="mdc-button__ripple"></div>
   <span class="mdc-button__label">Find</span>
 </button>
+		
+		
 	</div>
-	<div id="arrayHere">
-	</div>
-<!-- 	<div class="row">
+	
+
+	
+	<div id="buttonsScreen">
+	
+	<div class="row">
 		<h3> Choose what kind of graph: </h3>
 	</div>
 	<div class="row">
@@ -68,7 +79,9 @@
 		  <span class="mdc-button__label">Field Goal Percentage</span>
 		</button>
 		
-	</div> -->
+	</div>
+		
+	</div>
 
 	 <div id="curve_chart" style="width: 900px; height: 500px"></div>
 <!-- 	 	 <div id="linechart_material" style="width: 900px; height: 500px"></div> -->

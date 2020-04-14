@@ -2,6 +2,11 @@
     color: #2d3436;
 }
 
+#buttonsScreen{
+	display: none;
+	
+}
+
 /* .mdc-button--outlined{
 	color:#2d3436;
 } */
