@@ -1,17 +1,57 @@
-.mdc-button:not(:disabled) {
-    color: #2d3436;
-}
-
 #buttonsScreen{
 	display: none;
+	text-align: center;
 	
+} 
+#searchScreen{
+	display: none;
+	text-align: center;
 }
 
-/* .mdc-button--outlined{
-	color:#2d3436;
-} */
+#infoScreen{
+	text-align: center;	
+	position: fixed;
+    top: 50%;
+    left: 50%;
+  	transform: translate(-50%, -50%); 
+/* 	 Put in the very center of the screen*/
+}
+
+
+.mdc-button.mdc-button--raised{
+	color: #388087;
+	background-color: #BADFE7;
+	margin-bottom: 25px;
+	margin-top: 25px;
+	font-family: Josefin Sans;
+	font-size: 20px;
+}
+
+#addValuesHere{
+/* 	 does not center graph for some reason */
+	text-align: center;
+}
+
+
+p{
+	color: #388087;
+	font-size: 15px;
+	font-family: Josefin Sans;
+}
+
+h2{
+	color: #6fb3b8;
+	font-family: Josefin Sans;
+	margin-bottom: 35px;
+	font-size: 35px;
+}
+
+h3{
+	color: #408697;
+	font-size: 35px;
+	font-family: Josefin Sans; 
+}
 
 body{
-/* 	background-color:#F8EFBA;	 */
-background-color: #74b9ff;
+	background-color: #f6f6f2;
 }
