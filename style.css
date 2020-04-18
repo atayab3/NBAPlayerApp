@@ -31,8 +31,16 @@
 /* 	 does not center graph for some reason */
 	text-align: center;
 }
-
-
+#curve_chart{
+	text-align: center;
+	left: 50%;
+}
+#pts{
+	margin-right: 10px;
+}
+#rebs{
+	margin-right: 10px;
+}
 p{
 	color: #388087;
 	font-size: 15px;

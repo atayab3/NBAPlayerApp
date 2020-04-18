@@ -1,8 +1,9 @@
 let apiEndpoint = "https://www.balldontlie.io/api/v1/players";
 var curSeason = 2019;	//?search=lebron_james - UNDERSCORE WORKS
 
+
 var statTitles = ["Points", "Rebounds", "Assists", "Field Goal %", "3-Point Field Goal Percentage"];//, "Steals", "Blocks", "FG%", "3Pt FG%" 
-var statVars = ["points", "rebounds", "assists", "fgPercent", "threePercent"];
+var statVars = ["pts", "reb", "ast", "fg_pct", "fg3_pct"];
 
 var dataArr = [] ; // 2D Array for chart data
 var yearlyPts = []; // the specific stat per year that feeds the 2D Array
@@ -12,6 +13,7 @@ var statTitle ;
 var PlayerName; 
 
 
+          //
           // Define your database
          
 var db = new Dexie("stats_database");
@@ -19,6 +21,9 @@ var db = new Dexie("stats_database");
 		stats: '++entry, playerID, year, points, rebounds, assists, fgPercent, threePercent'
      });
           
+// Put some data into it
+//      db.friends.put({name: "Nicolas", shoeSize: 8}).then (function(){
+              
 
 //Searches for name with underscore
 // creates URLs for each api endpoint year, up til 2000
@@ -36,7 +41,6 @@ createDataChart = (stringStat)=>{
 	 fetch(nbaApi)
 		.then(response => {return response.json()   } ) 
 		.then(  json => {
-		 
 				var searchResultSize = json.meta["total_count"];
 		 		 
 		 
@@ -47,21 +51,26 @@ createDataChart = (stringStat)=>{
 					 
 					 fetchData(urlArray).then (responses => {//PLACES I MIGHT BE ABLE TO USE INDEXED DB TO STOP FETCHING 
 						
-					//put info into the database
-					createAnnualStatsDB(responses);
-					
-// retrieveDBInfo();
-					dataArr = turnDBtoArray(stringStat);
-				 
+					 dataArr= getAnnualStats(responses, stringStat);
+						
+						dataArr = dataArr.reverse();
+						console.log("IN IF STATEMENT -- array of Data is:");
+						console.log(dataArr);
+						 
 						 // go to next screen
 						document.querySelector("#searchScreen").style.display = "none";
 						document.querySelector("#buttonsScreen").style.display = "block";
 						 
-// 						google.charts.load('current', {'packages':['corechart']});
-// 						google.charts.setOnLoadCallback(drawChart );
+						google.charts.load('current', {'packages':['corechart']});
+						google.charts.setOnLoadCallback(drawChart );
+						
 
 					}  )
-				 }//end if statement	 
+					 			 
+				 }//end if statement
+		 
+		 
+		 
 				 else if(searchResultSize == 0){ //account for CASE that name/id does not exist	
 					 // stay on search screen
 					 document.querySelector("#searchScreen").style.display = "block";
@@ -70,7 +79,9 @@ createDataChart = (stringStat)=>{
 					p1.textContent = "Whoops, player does not exist, check spelling";
 					document.getElementById("addValuesHere").appendChild(p1);
 					 // IDEAS: will handle this case later
+					 // do a different search with the name before or aftr the space - 
 					 // using datalist
+					
 				 }
 		 
 		 
@@ -78,82 +89,72 @@ createDataChart = (stringStat)=>{
 					 console.log("Multiple players with this name exist, further action required");	
 					
 				 }
+		 
 		})
 }
 
 
 
-createAnnualStatsDB  = (respondent ) =>{//PLACES I MIGHT BE ABLE TO USE INDEXED DB TO STOP FETCHING 
+getAnnualStats  = (respondent, stringStat ) =>{//PLACES I MIGHT BE ABLE TO USE INDEXED DB TO STOP FETCHING 
+	var numUndefined = 0; // if surpasses 2 stop tracking data
+	var tempArr = [];
+	var  dataTwoDArray = [];
+	dataTwoDArray.push(['Year', 'Points']);
 
-// 	IDEA: OPTIMIZE LATER
+// 	IDEA: USE boolean to indicate if previous was not undefined
+// 	If previous was not undefined and not the current but next one is then stop adding to array
+
 	for(var x = 0; x < respondent.length; x++){
-		if(respondent[x].data[0] == undefined){ 
+// 		if(numUndefined == 2){ // does this even work????
+// 			break;
+// 		}
+		if(respondent[x].data[0] == undefined){ // Kevin Durant test case// does this even work????
 			console.log("undefined found at year " + x);
+
+// 			IDEA adding 2 then going back one, another variable to stop after going back once
 			continue;
 		}
 		else{
-			db.stats.add({
-				playerID: respondent[x].data[0]["player_id"],
-				year: respondent[x].data[0]["season"],
-				points: respondent[x].data[0]["pts"],
-				rebounds: respondent[x].data[0]["reb"],
-				assists: respondent[x].data[0]["ast"],
-				fgPercent: respondent[x].data[0]["fg_pct"],
-				threePercent: respondent[x].data[0]["fg3_pct"]				
-			})
-		} // end else	
-	} // end for loop 
+
+// 			console.log(respondent[x].data[0]);
+			var curYear = respondent[x].data[0]["season"];
+			var curYearString = curYear.toString();
+			var curStat = respondent[x].data[0][ stringStat ];
+			
+			 
+			tempArr = [curYearString, curStat];
+			console.log(tempArr);
+			dataTwoDArray.unshift(tempArr);
+		}
+		
+	}
+	console.log("testing 123");
+	console.log(dataTwoDArray);
+	return dataTwoDArray;
 	
 } 
 
 
-turnDBtoArray = (stringStat) =>{
-		console.log(stringStat);
-		var tempArr = [];
-		var TwoDArr = [];
-	
-		TwoDArr.push(['Year', stringStat]);
-		console.log("inside turnDBtoArray function ");
-		var curYear ;// = respondent[x].data[0]["season"];
-		var curYearString;// = curYear.toString();
-		var newArr;
-		db.stats.toArray()
-		.then( (arr)=> {
-			for(var i = 0 ; i < arr.length; ++i){
-				console.log("get done to business");
-				curYear = arr[i]["year"];
-				curYearString = curYear.toString();
-				
-				tempArr = [curYearString, arr[i][stringStat] ]; // need to put String Stat here
-				TwoDArr.push(tempArr);
 
-				
-			}
-				console.log(TwoDArr);
-				dataArr = TwoDArr;
-				google.charts.load('current', {'packages':['corechart']});
-				google.charts.setOnLoadCallback(drawChart ); 
-	} )
-	return TwoDArr; 
-}
 
-// retrieveDBInfo = () => {
-// 	// Let us open our database
-// 	let x ;
-// db.stats.get(1, function (firstYear) {
-// 	x = firstYear.points
-//     console.log("Points with id 1: " + firstYear.points);
-// });
-// 	console.log("what is x in retrieveDBInfo");
-// 	console.log(x);
-// }
+
+
+
+
+
+
+
+
+
+
+
 
 // returns array of URLS with a specific player(ID) from the current season all the way to 2011
 getUrls = (playerId, curSeason ) =>{
 	var newApi; 
 	var i =0;
 	var urlArr = [];
-	for(i = curSeason ; i >= 2010; i--){
+	for(i = curSeason ; i >= 2000; i--){
 		newApi = "https://www.balldontlie.io/api/v1/season_averages/" 
 			+ "?season=" + i
 			+ "&player_ids[]=" + playerId ;
@@ -166,7 +167,7 @@ getUrls = (playerId, curSeason ) =>{
 
 //Function from Hayes // using Promise.All to fetch multiple requests
 //pass in all apiEndpoints to fetches the data for all - still kind of confused by this
-fetchData = (urlsArr) => { //PLACES I MIGHT BE ABLE TO USE INDEXED DB TO STOP repeated FETCHING 
+fetchData = (urlsArr) => { //PLACES I MIGHT BE ABLE TO USE INDEXED DB TO STOP FETCHING 
   const allRequests = urlsArr.map(url => 
 								  
     fetch(url).then(response => response.json())
@@ -175,6 +176,7 @@ fetchData = (urlsArr) => { //PLACES I MIGHT BE ABLE TO USE INDEXED DB TO STOP re
   return Promise.all(allRequests);
 };
         
+
 
 //spaceRemover takes in user inputted string and makes it searchable within API Endpoint
 spaceRemover = (pName) =>{
@@ -186,12 +188,14 @@ spaceRemover = (pName) =>{
       
 
 drawChart = ()=> {
-	console.log("in drawChart");
+		console.log("in drawChart");
 	console.log(dataArr);
         var data = google.visualization.arrayToDataTable(dataArr);
-
+// 		console.log("In draw chart, data is:");
+// 		console.log(data);
         var options = {
           title: playerName + " " + statTitle + " Per Game over the Seasons",
+//           curveType: 'function',
           legend: { position: 'bottom' }
         };
 
@@ -203,36 +207,26 @@ drawChart = ()=> {
 
 // buttons to bring up different graphs
 clickedBtn = () =>{
-		document.getElementById("pts").addEventListener("click",  (e)=> {
-					statTitle = statTitles[0];
-					dataArr = turnDBtoArray("points");
-					
-		})
 		document.getElementById("reb").addEventListener("click",  (e)=> {
 					statTitle = statTitles[1];
-					dataArr = turnDBtoArray("rebounds");
-				
+					createDataChart(statVars[1]); 
 		})
 		document.getElementById("ast").addEventListener("click",  (e)=> {
 					statTitle = statTitles[2];
-					dataArr = turnDBtoArray("assists");
-					google.charts.load('current', {'packages':['corechart']});
-					google.charts.setOnLoadCallback(drawChart ); 
+					createDataChart(statVars[2]); 
 		})
 		document.getElementById("fg-percent").addEventListener("click",  (e)=> {
 					statTitle = statTitles[3];
-					dataArr = turnDBtoArray(statVars[3]);
-					google.charts.load('current', {'packages':['corechart']});
-					google.charts.setOnLoadCallback(drawChart ); 
+					createDataChart(statVars[3]); 
 		})
 		document.getElementById("fg3-percent").addEventListener("click",  (e)=> {
 					statTitle = statTitles[4];
-					dataArr = turnDBtoArray(statVars[4]);
-					google.charts.load('current', {'packages':['corechart']});
-					google.charts.setOnLoadCallback(drawChart );
+					createDataChart(statVars[4]); 
 		})
 	
 }
+
+
 
 
 document.querySelector("#infoScreen").style.display = "block";
@@ -241,7 +235,7 @@ document.querySelector("#buttonsScreen").style.display = "none";
 
 // Screen Transitions
 document.getElementById("goSearch").addEventListener("click",  (e)=> {  
-	Dexie.delete('stats_database');
+
 	document.querySelector("#infoScreen").style.display =  "none";
 	document.querySelector("#searchScreen").style.display = "block";
 
@@ -249,10 +243,8 @@ document.getElementById("goSearch").addEventListener("click",  (e)=> {
 } )
 
 document.getElementById("findPlayer").addEventListener("click",  (e)=> {
-	
-// 	db.stats.clear();
 	statTitle = statTitles[0];
-	createDataChart("points"); 
+	createDataChart(statVars[0]); 
 					
 			
 		})
