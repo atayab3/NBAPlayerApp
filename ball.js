@@ -153,14 +153,14 @@ getUrls = (playerId, curSeason ) =>{
 	var newApi; 
 	var i =0;
 	var urlArr = [];
-	for(i = curSeason ; i >= 2010; i--){
+	for(i = curSeason ; i >= 1990; i--){
 		newApi = "https://www.balldontlie.io/api/v1/season_averages/" 
 			+ "?season=" + i
 			+ "&player_ids[]=" + playerId ;
 		urlArr.unshift(newApi);
 	}
-	console.log("url array");
-	console.log(urlArr);
+// 	console.log("url array");
+// 	console.log(urlArr);
 	return urlArr;
 }
 

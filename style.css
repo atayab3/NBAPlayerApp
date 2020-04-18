@@ -33,14 +33,25 @@
 }
 #curve_chart{
 	text-align: center;
-	left: 50%;
+/* 	: 50%; */
 }
-#pts{
+/* #pts{
+	left: 0%
 	margin-right: 10px;
 }
-#rebs{
-	margin-right: 10px;
+#reb{
+	left: 15%;
 }
+#ast{
+	left: 25%;
+
+}
+#fg-percent{
+	left: 10% ;
+}
+#fg3-percent{
+	left: 20%;
+} */
 p{
 	color: #388087;
 	font-size: 15px;
