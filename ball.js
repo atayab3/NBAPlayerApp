@@ -20,6 +20,13 @@ var db = new Dexie("stats_database");
      });
           
 
+
+
+createPlayerInfoBox = ()=>{
+	
+	
+}
+
 //Searches for name with underscore
 // creates URLs for each api endpoint year, up til 2000
 // returns 2D array of years - points 
@@ -153,7 +160,7 @@ getUrls = (playerId, curSeason ) =>{
 	var newApi; 
 	var i =0;
 	var urlArr = [];
-	for(i = curSeason ; i >= 2008; i--){
+	for(i = curSeason ; i >= 1996; i--){
 		newApi = "https://www.balldontlie.io/api/v1/season_averages/" 
 			+ "?season=" + i
 			+ "&player_ids[]=" + playerId ;
@@ -214,15 +221,26 @@ createSearchList = () => {
 }
 
 
-
 drawChart = ()=> {
 	console.log("in drawChart");
 	console.log(dataArr);
+	var vAxis2 ;
+	 if(statTitle == "3-Point Field Goal Percentage" || statTitle == "Field Goal %" ){
+			  vAxis2 = { minValue: 0, maxValue: 1 };
+	}
+	else if(statTitle == "Rebounds" || statTitle == "Assists" ){
+			vAxis2 = { minValue: 0, maxValue: 20 };
+	}
+	else{
+			 vAxis2 = { minValue: 0, maxValue: 40 };
+	 }
         var data = google.visualization.arrayToDataTable(dataArr);
 
         var options = {
           title: playerName + " " + statTitle + " Per Game over the Seasons",
-          legend: { position: 'bottom' }
+          legend: { position: 'bottom' },
+		  vAxis: vAxis2,
+		  pointSize: 5,
         };
 
         var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));

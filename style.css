@@ -28,9 +28,13 @@
 	margin-top: 10px;
 	font-family: Josefin Sans;
 	font-size: 20px;
+	margin-left: 5px; 
 /* 	width: 70%; */
 }
-
+#buttons{
+	text-align: center;
+	margin-bottom: 15px;
+}
 #addValuesHere{
 /* 	 does not center graph for some reason */
 	text-align: center;
@@ -99,6 +103,12 @@ h3{
 	font-size: 35px;
 	font-family: Josefin Sans; 
 }
+h4{
+	color: #6fb3b8;
+	font-family: Josefin Sans;
+	margin-bottom: 35px;
+	font-size: 25px;
+}
 
 body{
 	background-color: #f6f6f2;
@@ -106,19 +116,20 @@ body{
 }
 
 
-rect{
+/* rect{
 	display: flex;
 	justify-content: center;
 	align-items: center;
-/* 	x: 50%;  */
+
 }
 svg{
 	 display: flex;
 	justify-content: center;
 	align-items: center;
-}
+} */
 #chartArea{
 	 display: flex;
 	justify-content: center;
 	align-items: center;
+/* 	background-color: #6fb3b8; */
 }
