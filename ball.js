@@ -200,21 +200,23 @@ spaceRemover = (pName) =>{
       
 let topPlayers = ["Andrew Wiggins", "Terrence Ross", "DeAndre Jordan", "Jarrett Allen", "Kyle Kuzma", "Joe Harris",
 					"Dejounte Murray", "Bam Adebayo", "Spencer Dinwiddie", "Derrick White", "Zach LaVine", "Danny Green",
-					"Jonas Valančiūnas", "Jeff Teague", "Andre Iguodala", "Brandon Ingram", "Al-Farouq Aminu", "Jaren Jackson Jr.", 
+					"Jonas Valančiūnas", "Jeff Teague", "Dwight Howard", "Andre Iguodala", "Brandon Ingram", "Al-Farouq Aminu", "Jaren Jackson Jr.", 
 					"Marcus Smart", "Patrick Beverley", "Serge Ibaka", "Julius Randle", "Jusuf Nurkić", "Montrezl Harrell",
 					"Domantas Sabonis", "Lauri Markkanen", "P.J. Tucker", "Ricky Rubio", "Harrison Barnes", "Josh Richardson",
 					"Thaddeus Young", "Caris LeVert", "Jaylen Brown", "JJ Redick", "Brook Lopez", "Joe Ingles", "Robert Covington",
-					 "Eric Gordon", "Trae Young", "Malcolm Brogdon",
-					 "Aaron Gordon", "Gordon Hayward", "Klay Thompson", "Otto Porter", "Clint Capela", "Derrick Favors",
+					 "Eric Gordon", "Trae Young", "Malcolm Brogdon", "Ray Allen", "Paul Pierce", "Rajon Rondo", 
+					 "Aaron Gordon", "Gordon Hayward", "Klay Thompson", "Chris Bosh", "Otto Porter", "Clint Capela", "Derrick Favors",
 					 "Buddy Hield", "Lou Williams", "Bojan Bogdanović","John Collins", "Danilo Gallinari",
 					 "Tobias Harris", "Gary Harris", "Myles Turner", "Eric Bledsoe", "Nikola Vucevic", "D'Angelo Russell",
-					"Paul Millsap", "Marc Gasol", "Kevin Love", "Steven Adams", "Victor Oladipo", "Jamal Murray", 
+					"Paul Millsap", "Marc Gasol", "Pau Gasol", "Kevin Love", "Steven Adams", "Victor Oladipo", "Jamal Murray", 
 					"Kristaps Porzingis", "Andre Drummond", "Jayson Tatum",  "Devin Booker", "De'Aaron Fox", "CJ McCollum",
-					 "DeMar DeRozan", "Luka Dončić", "Donovan Mitchell", "Kyle Lowry","Khris Middleton", "Mike Conley",
-					 "Jrue Holiday", "Pascal Siakam", "Ben Simmons", "Bradley Beal", "Chris Paul", "Kemba Walker", 
-					"Blake Griffin", "Al Horford", "Draymond Green", "LaMarcus Aldridge", "Kyrie Irving","Rudy Gobert","Karl-Anthony Towns","Russell Westbrook",
-					 "Jimmy Butler", "Damian Lillard", "Paul George", "Nikola Jokic","Joel Embiid", "Anthony Davis","James Harden",
-					"Stephen Curry", "LeBron James", "Kawhi Leonard", "Giannis Antetokounmpo"]
+					 "DeMar DeRozan", "Luka Dončić", "Donovan Mitchell","Tony Parker", "Manu Ginobili", "Kyle Lowry","Khris Middleton", "Mike Conley",
+					 "Jrue Holiday", "Pascal Siakam", "Ben Simmons", "Bradley Beal", "Chris Paul", "Kemba Walker", "John Wall", "DeMarcus Cousins",
+					"Blake Griffin", "Al Horford", "Draymond Green", "Yao Ming", "Carmelo Anthony", "LaMarcus Aldridge", "Kyrie Irving","Rudy Gobert","Karl-Anthony Towns","Russell Westbrook",
+					 "Jimmy Butler", "Damian Lillard", "Paul George", "Nikola Jokic", "Tracy McGrady","Joel Embiid", "Kevin Garnett", "Jason Kidd", "Steven Nash",
+				     "Tim Duncan", "Allen Iverson",  "Dwyane Wade",  "Vince Carter", "Dirk Nowitzki", "Shaquille O'Neal", "Kobe Bryant",  "Anthony Davis","James Harden",
+					"Stephen Curry", "Kevin Durant", "LeBron James", "Kawhi Leonard", "Giannis Antetokounmpo"]
+console.log("Data List from https://www.si.com/nba/2019/09/12/top-100-nba-players-2020 and some NBA legends of the 2000s that I chose");
 
 createSearchList = () => {
 	

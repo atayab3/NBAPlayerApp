@@ -32,8 +32,8 @@
 /* 	width: 70%; */
 }
 #buttons{
-	text-align: left;
-	margin-bottom: -250px;
+	text-align: center;
+	margin-bottom: 5px;
 }
 #addValuesHere{
 /* 	 does not center graph for some reason */
