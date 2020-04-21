@@ -153,7 +153,7 @@ getUrls = (playerId, curSeason ) =>{
 	var newApi; 
 	var i =0;
 	var urlArr = [];
-	for(i = curSeason ; i >= 1990; i--){
+	for(i = curSeason ; i >= 2008; i--){
 		newApi = "https://www.balldontlie.io/api/v1/season_averages/" 
 			+ "?season=" + i
 			+ "&player_ids[]=" + playerId ;
@@ -184,6 +184,36 @@ spaceRemover = (pName) =>{
 	return newName;   //console.log(newName);
 }
       
+let topPlayers = ["Andrew Wiggins", "Terrence Ross", "DeAndre Jordan", "Jarrett Allen", "Kyle Kuzma", "Joe Harris",
+					"Dejounte Murray", "Bam Adebayo", "Spencer Dinwiddie", "Derrick White", "Zach LaVine", "Danny Green",
+					"Jonas Valančiūnas", "Jeff Teague", "Andre Iguodala", "Brandon Ingram", "Al-Farouq Aminu", "Jaren Jackson Jr.", 
+					"Marcus Smart", "Patrick Beverley", "Serge Ibaka", "Julius Randle", "Jusuf Nurkić", "Montrezl Harrell",
+					"Domantas Sabonis", "Lauri Markkanen", "P.J. Tucker", "Ricky Rubio", "Harrison Barnes", "Josh Richardson",
+					"Thaddeus Young", "Caris LeVert", "Jaylen Brown", "JJ Redick", "Brook Lopez", "Joe Ingles", "Robert Covington",
+					 "Eric Gordon", "Trae Young", "Malcolm Brogdon",
+					 "Aaron Gordon", "Gordon Hayward", "Klay Thompson", "Otto Porter", "Clint Capela", "Derrick Favors",
+					 "Buddy Hield", "Lou Williams", "Bojan Bogdanović","John Collins", "Danilo Gallinari",
+					 "Tobias Harris", "Gary Harris", "Myles Turner", "Eric Bledsoe", "Nikola Vucevic", "D'Angelo Russell",
+					"Paul Millsap", "Marc Gasol", "Kevin Love", "Steven Adams", "Victor Oladipo", "Jamal Murray", 
+					"Kristaps Porzingis", "Andre Drummond", "Jayson Tatum",  "Devin Booker", "De'Aaron Fox", "CJ McCollum",
+					 "DeMar DeRozan", "Luka Dončić", "Donovan Mitchell", "Kyle Lowry","Khris Middleton", "Mike Conley",
+					 "Jrue Holiday", "Pascal Siakam", "Ben Simmons", "Bradley Beal", "Chris Paul", "Kemba Walker", 
+					"Blake Griffin", "Al Horford", "Draymond Green", "LaMarcus Aldridge", "Kyrie Irving","Rudy Gobert","Karl-Anthony Towns","Russell Westbrook",
+					 "Jimmy Butler", "Damian Lillard", "Paul George", "Nikola Jokić","Joel Embiid", "Anthony Davis","James Harden",
+					"Stephen Curry", "LeBron James", "Kawhi Leonard", "Giannis Antetokounmpo"]
+
+createSearchList = () => {
+	
+	for(var i = topPlayers.length-1 ; i >= 0; --i){
+		let dataOption = document.createElement("option");
+		dataOption.value = topPlayers[i];
+		document.getElementById("browsers").appendChild(dataOption);
+	}
+	
+	
+}
+
+
 
 drawChart = ()=> {
 	console.log("in drawChart");
@@ -198,11 +228,13 @@ drawChart = ()=> {
         var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
 
         chart.draw(data, options);
+		document.body.style.backgroundColor = "#436372";
       }
 
 
 // buttons to bring up different graphs
 clickedBtn = () =>{
+	
 		document.getElementById("pts").addEventListener("click",  (e)=> {
 					statTitle = statTitles[0];
 					dataArr = turnDBtoArray("points");
@@ -242,8 +274,10 @@ document.querySelector("#buttonsScreen").style.display = "none";
 // Screen Transitions
 document.getElementById("goSearch").addEventListener("click",  (e)=> {  
 	Dexie.delete('stats_database');
+	createSearchList();
 	document.querySelector("#infoScreen").style.display =  "none";
 	document.querySelector("#searchScreen").style.display = "block";
+	
 
 
 } )
@@ -251,9 +285,9 @@ document.getElementById("goSearch").addEventListener("click",  (e)=> {
 document.getElementById("findPlayer").addEventListener("click",  (e)=> {
 	
 // 	db.stats.clear();
+// 	createSearchList
 	statTitle = statTitles[0];
 	createDataChart("points"); 
-					
-			
+							
 		})
 clickedBtn();

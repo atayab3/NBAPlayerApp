@@ -1,8 +1,11 @@
 #buttonsScreen{
 	display: none;
-	text-align: center;
+/* 	text-align: left; */
 	
 } 
+#buttonScreen.h3{
+	color: #f6f6f2;
+}
 #searchScreen{
 	display: none;
 	text-align: center;
@@ -14,17 +17,18 @@
     top: 50%;
     left: 50%;
   	transform: translate(-50%, -50%); 
+	
 /* 	 Put in the very center of the screen*/
 }
 
-
 .mdc-button.mdc-button--raised{
-	color: #388087;
+	color:#388087;
 	background-color: #BADFE7;
-	margin-bottom: 25px;
-	margin-top: 25px;
+	margin-bottom: 10px;
+	margin-top: 10px;
 	font-family: Josefin Sans;
 	font-size: 20px;
+/* 	width: 70%; */
 }
 
 #addValuesHere{
@@ -32,26 +36,51 @@
 	text-align: center;
 }
 #curve_chart{
-	text-align: center;
-/* 	: 50%; */
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
-/* #pts{
-	left: 0%
-	margin-right: 10px;
+
+#goSearch{
+	color: #388087;
+	background-color: #BADFE7;
+	margin-bottom: 25px;
+	margin-top: 25px;
+	font-family: Josefin Sans;
+	font-size: 20px;
+/* 	width: 50%; */
+}
+.mdc-text-field:not(.mdc-text-field--disabled) .mdc-text-field__input{
+	color: #6FB3B8;
+}
+.mdc-text-field__input{
+	size: "50";
+}
+.option{
+	size: 50;
+}
+#pts{
+	color: #dff9fb;
+	background-color: #2d3436;
 }
 #reb{
-	left: 15%;
+	color: #dff9fb;
+	background-color: #2d3436;
 }
+
 #ast{
-	left: 25%;
+	color: #dff9fb;
+	background-color: #2d3436;
 
 }
 #fg-percent{
-	left: 10% ;
+	color: #dff9fb;
+	background-color: #2d3436;
 }
 #fg3-percent{
-	left: 20%;
-} */
+	color: #dff9fb;
+	background-color: #2d3436;
+}
 p{
 	color: #388087;
 	font-size: 15px;
@@ -66,11 +95,30 @@ h2{
 }
 
 h3{
-	color: #408697;
+	color: #f6f6f2;
 	font-size: 35px;
 	font-family: Josefin Sans; 
 }
 
 body{
 	background-color: #f6f6f2;
+/* 	background-color: #c7ecee; */
+}
+
+
+rect{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+/* 	x: 50%;  */
+}
+svg{
+	 display: flex;
+	justify-content: center;
+	align-items: center;
+}
+#chartArea{
+	 display: flex;
+	justify-content: center;
+	align-items: center;
 }

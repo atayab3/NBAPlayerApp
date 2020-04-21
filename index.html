@@ -57,16 +57,19 @@
 
 				<div id="nameSearch" class="mdc-text-field mdc-text-field--outlined">
 
-				  <input size="50" class="mdc-text-field__input" id="text-field-hero-input">
+				  <input   class="mdc-text-field__input" list="browsers" id="text-field-hero-input">
+<!-- 					//size="50" -->
 				  <div class="mdc-notched-outline">
 					<div class="mdc-notched-outline__leading"></div>
 					<div class="mdc-notched-outline__notch">
 					  <label for="text-field-hero-input" class="mdc-floating-label"></label>
 					</div>
 					<div class="mdc-notched-outline__trailing"></div>
+					  
 				  </div>
 				</div>
 				
+				 <datalist id="browsers"> </datalist>
 			</div>	
 
 			<div  class="row">
@@ -96,42 +99,43 @@
 		
 		<div class="row">
 			
-			<button id="pts" class="mdc-button mdc-button--raised first-r">
-			  <div class="mdc-button__ripple"></div>
-			  <span class="mdc-button__label">Points</span>
-			</button>
-
-			<button id="reb" class="mdc-button mdc-button--raised second-r">
-			  <div class="mdc-button__ripple"></div>
-			  <span class="mdc-button__label">Rebounds</span>
-			</button>
-
-			<button id="ast" class="mdc-button mdc-button--raised third-r">
-			  <div class="mdc-button__ripple"></div>
-			  <span class="mdc-button__label">Assists</span>
-			</button>
-		</div>
+				<button id="pts" class="mdc-button mdc-button--raised first-r">
+				  <div class="mdc-button__ripple"></div>
+				  <span class="mdc-button__label"> Points </span>
+				</button>
+			
+				<button id="reb" class="mdc-button mdc-button--raised second-r">
+				  <div class="mdc-button__ripple"></div>
+				  <span class="mdc-button__label">Rebounds</span>
+				</button>
+			
+	
 		
-		<div class="row">
+				<button id="ast" class="mdc-button mdc-button--raised third-r">
+				  <div class="mdc-button__ripple"></div>
+				  <span class="mdc-button__label">Assists</span>
+				</button>
+		
+				<button id="fg-percent" class="mdc-button mdc-button--raised fourth-r">
+				  <div class="mdc-button__ripple"></div>
+				  <span class="mdc-button__label">  FG %  </span>
+				</button>
 
-			<button id="fg-percent" class="mdc-button mdc-button--raised fourth-r">
-			  <div class="mdc-button__ripple"></div>
-			  <span class="mdc-button__label">Field Goal %</span>
-			</button>
+				<button id="fg3-percent" class="mdc-button mdc-button--raised fifth-r">
+				  <div class="mdc-button__ripple"></div>
+				  <span class="mdc-button__label">3PT FG %</span>
+				</button>
 
-			<button id="fg3-percent" class="mdc-button mdc-button--raised fifth-r">
-			  <div class="mdc-button__ripple"></div>
-			  <span class="mdc-button__label">3PT Field Goal %</span>
-			</button>
-		</div>
+			
+	</div> <!-- 		end row -->
 		
 		
-		<div class="row">
+		<div id="chartArea"  class="row">
 			<div id="curve_chart" style="width: 800px; height: 300px"></div>
-		</div>	
-		
+		</div>
+	
+	
 	</div>
-
 
 <script src = "ball.js">	</script> 
 
