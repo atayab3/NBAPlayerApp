@@ -16,10 +16,11 @@ var playerTeam;
 
           // Define your database
          
-var db = new Dexie("stats_database");
-	db.version(1).stores({
-		stats: '++entry, playerID, year, points, rebounds, assists, fgPercent, threePercent'
-     });
+var db ;
+// = new Dexie("stats_database");
+// 	db.version(1).stores({
+// 		stats: '++entry, playerID, year, points, rebounds, assists, fgPercent, threePercent'
+//      });
           
 
 
@@ -28,15 +29,6 @@ createPlayerInfoBox = ()=>{
 	let nameElement = document.createElement('h1');
 	nameElement.textContent = playerName ;
 	document.getElementById("playerInfo").appendChild(nameElement);
-// 	let p1 = document.createElement('p');
-// 	p1.style.color = "#dfe6e9" ; 	
-// 	p1.textContent = "Position: " + playerPosition;
-// 	document.getElementById("playerInfo").appendChild(p1);
-// 	let p2 = document.createElement('p');
-// 	p2.style.color = "#dfe6e9" ;
-// 	p2.textContent = "Current Team: " + playerTeam; 
-// 	document.getElementById("playerInfo").appendChild(p2);
-	
 }
 
 //Searches for name with underscore
@@ -63,7 +55,9 @@ createDataChart = (stringStat)=>{
 					 playerName = json.data[0]["first_name"] + " " + json.data[0]["last_name"];
 					 playerTeam = json.data[0]["team"]["full_name"];
 					 playerPosition = json.data[0]["position"];
-					 createPlayerInfoBox();
+// 					 createPlayerInfoBox();
+// 					 
+// 					 
 					 playerID = json.data[0]["id"];
 					 urlArray = getUrls(playerID, curSeason);
 					 
@@ -75,6 +69,7 @@ createDataChart = (stringStat)=>{
 					dataArr = turnDBtoArray(stringStat);
 				 
 						 // go to next screen
+						document.body.style.backgroundColor = "#436372";
 						document.querySelector("#searchScreen").style.display = "none";
 						document.querySelector("#buttonsScreen").style.display = "block";
 
@@ -218,7 +213,7 @@ let topPlayers = ["Andrew Wiggins", "Terrence Ross", "DeAndre Jordan", "Jarrett 
 					 "DeMar DeRozan", "Luka Dončić", "Donovan Mitchell", "Kyle Lowry","Khris Middleton", "Mike Conley",
 					 "Jrue Holiday", "Pascal Siakam", "Ben Simmons", "Bradley Beal", "Chris Paul", "Kemba Walker", 
 					"Blake Griffin", "Al Horford", "Draymond Green", "LaMarcus Aldridge", "Kyrie Irving","Rudy Gobert","Karl-Anthony Towns","Russell Westbrook",
-					 "Jimmy Butler", "Damian Lillard", "Paul George", "Nikola Jokić","Joel Embiid", "Anthony Davis","James Harden",
+					 "Jimmy Butler", "Damian Lillard", "Paul George", "Nikola Jokic","Joel Embiid", "Anthony Davis","James Harden",
 					"Stephen Curry", "LeBron James", "Kawhi Leonard", "Giannis Antetokounmpo"]
 
 createSearchList = () => {
@@ -234,6 +229,7 @@ createSearchList = () => {
 
 
 drawChart = ()=> {
+	
 	console.log("in drawChart");
 	console.log(dataArr);
 	var vAxis2 ;
@@ -258,7 +254,7 @@ drawChart = ()=> {
         var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
 
         chart.draw(data, options);
-		document.body.style.backgroundColor = "#436372";
+		
       }
 
 
@@ -267,57 +263,65 @@ clickedBtn = () =>{
 	
 		document.getElementById("pts").addEventListener("click",  (e)=> {
 					statTitle = statTitles[0];
-					dataArr = turnDBtoArray("points");
-					
+					dataArr = turnDBtoArray("points");	
 		})
 		document.getElementById("reb").addEventListener("click",  (e)=> {
 					statTitle = statTitles[1];
-					dataArr = turnDBtoArray("rebounds");
-				
+					dataArr = turnDBtoArray("rebounds");		
 		})
 		document.getElementById("ast").addEventListener("click",  (e)=> {
 					statTitle = statTitles[2];
 					dataArr = turnDBtoArray("assists");
-					google.charts.load('current', {'packages':['corechart']});
-					google.charts.setOnLoadCallback(drawChart ); 
 		})
 		document.getElementById("fg-percent").addEventListener("click",  (e)=> {
 					statTitle = statTitles[3];
 					dataArr = turnDBtoArray(statVars[3]);
-					google.charts.load('current', {'packages':['corechart']});
-					google.charts.setOnLoadCallback(drawChart ); 
 		})
 		document.getElementById("fg3-percent").addEventListener("click",  (e)=> {
 					statTitle = statTitles[4];
 					dataArr = turnDBtoArray(statVars[4]);
-					google.charts.load('current', {'packages':['corechart']});
-					google.charts.setOnLoadCallback(drawChart );
 		})
 	
 }
 
-
+//Initial Screen Displays -which are on and off
 document.querySelector("#infoScreen").style.display = "block";
 document.querySelector("#searchScreen").style.display = "none";
 document.querySelector("#buttonsScreen").style.display = "none";
 
-// Screen Transitions
+// Screen Transitions from Info Screen to Searching Screen
 document.getElementById("goSearch").addEventListener("click",  (e)=> {  
-	Dexie.delete('stats_database');
-	createSearchList();
-	document.querySelector("#infoScreen").style.display =  "none";
-	document.querySelector("#searchScreen").style.display = "block";
+			Dexie.delete('stats_database');
+			createSearchList();
+			document.querySelector("#infoScreen").style.display =  "none";
+			document.querySelector("#searchScreen").style.display = "block";
 	
-
-
 } )
 
+// Find Player Button creates graph 
 document.getElementById("findPlayer").addEventListener("click",  (e)=> {
-	
-// 	db.stats.clear();
-// 	createSearchList
-	statTitle = statTitles[0];
-	createDataChart("points"); 
-							
+			console.log("Find Player button clicked");
+			
+			db = new Dexie("stats_database"); 
+			db.version(1).stores({
+				stats: '++entry, playerID, year, points, rebounds, assists, fgPercent, threePercent'
+			 });
+			statTitle = statTitles[0];
+			createDataChart("points"); 					
 		})
+
+
+
+//Search Again Button 
+
+document.getElementById("searchAgain").addEventListener("click",  (e)=> {
+			console.log("search Again button clicked");
+			Dexie.delete('stats_database');
+			document.body.style.backgroundColor = "#f6f6f2";
+			
+			document.getElementById("text-field-hero-input").value = "";
+			document.querySelector("#buttonsScreen").style.display =  "none";
+			document.querySelector("#searchScreen").style.display = "block";
+		})
+
 clickedBtn();

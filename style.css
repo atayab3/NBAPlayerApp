@@ -32,8 +32,8 @@
 /* 	width: 70%; */
 }
 #buttons{
-	text-align: center;
-	margin-bottom: 15px;
+	text-align: left;
+	margin-bottom: -250px;
 }
 #addValuesHere{
 /* 	 does not center graph for some reason */
@@ -84,6 +84,11 @@
 #fg3-percent{
 	color: #dff9fb;
 	background-color: #2d3436;
+/* 	margin-bottom: -25px;  */
+}
+#searchAgain{
+	color: #dff9fb;
+	background-color: #2d3436;
 }
 p{
 	color: #388087;
@@ -92,7 +97,7 @@ p{
 }
 
 #playerInfo{
-	color: #dfe6e9; 	
+	color: #f6f6f2; 	
 }
 h1{
 	font-size: 40px;
@@ -119,21 +124,9 @@ h4{
 
 body{
 	background-color: #f6f6f2;
-/* 	background-color: #c7ecee; */
 }
 
 
-/* rect{
-	display: flex;
-	justify-content: center;
-	align-items: center;
-
-}
-svg{
-	 display: flex;
-	justify-content: center;
-	align-items: center;
-} */
 #chartArea{
 	 display: flex;
 	justify-content: center;
