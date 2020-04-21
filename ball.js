@@ -52,6 +52,7 @@ createDataChart = (stringStat)=>{
 				var searchResultSize = json.meta["total_count"];
 		 		 
 				 if (searchResultSize == 1){// if that player exists
+					 document.getElementById("findPlayer").disabled = true;
 					 playerName = json.data[0]["first_name"] + " " + json.data[0]["last_name"];
 					 playerTeam = json.data[0]["team"]["full_name"];
 					 playerPosition = json.data[0]["position"];
@@ -319,6 +320,7 @@ document.getElementById("findPlayer").addEventListener("click",  (e)=> {
 document.getElementById("searchAgain").addEventListener("click",  (e)=> {
 			console.log("search Again button clicked");
 			Dexie.delete('stats_database');
+			document.getElementById("findPlayer").disabled = false;
 			document.body.style.backgroundColor = "#f6f6f2";
 			
 			document.getElementById("text-field-hero-input").value = "";
