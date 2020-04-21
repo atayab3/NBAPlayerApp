@@ -10,6 +10,8 @@ var urlArray = []; // all the urls to fetchALL promise shit
 
 var statTitle ;
 var PlayerName; 
+var playerPosition; 
+var playerTeam; 
 
 
           // Define your database
@@ -23,7 +25,17 @@ var db = new Dexie("stats_database");
 
 
 createPlayerInfoBox = ()=>{
-	
+	let nameElement = document.createElement('h1');
+	nameElement.textContent = playerName ;
+	document.getElementById("playerInfo").appendChild(nameElement);
+// 	let p1 = document.createElement('p');
+// 	p1.style.color = "#dfe6e9" ; 	
+// 	p1.textContent = "Position: " + playerPosition;
+// 	document.getElementById("playerInfo").appendChild(p1);
+// 	let p2 = document.createElement('p');
+// 	p2.style.color = "#dfe6e9" ;
+// 	p2.textContent = "Current Team: " + playerTeam; 
+// 	document.getElementById("playerInfo").appendChild(p2);
 	
 }
 
@@ -43,12 +55,15 @@ createDataChart = (stringStat)=>{
 	 fetch(nbaApi)
 		.then(response => {return response.json()   } ) 
 		.then(  json => {
-		 
+				 console.log("addam");
+				 console.log(json);
 				var searchResultSize = json.meta["total_count"];
 		 		 
-		 
 				 if (searchResultSize == 1){// if that player exists
-					 playerName = json.data[0]["first_name"] + " " + json.data[0]["last_name"]
+					 playerName = json.data[0]["first_name"] + " " + json.data[0]["last_name"];
+					 playerTeam = json.data[0]["team"]["full_name"];
+					 playerPosition = json.data[0]["position"];
+					 createPlayerInfoBox();
 					 playerID = json.data[0]["id"];
 					 urlArray = getUrls(playerID, curSeason);
 					 
@@ -57,15 +72,11 @@ createDataChart = (stringStat)=>{
 					//put info into the database
 					createAnnualStatsDB(responses);
 					
-// retrieveDBInfo();
 					dataArr = turnDBtoArray(stringStat);
 				 
 						 // go to next screen
 						document.querySelector("#searchScreen").style.display = "none";
 						document.querySelector("#buttonsScreen").style.display = "block";
-						 
-// 						google.charts.load('current', {'packages':['corechart']});
-// 						google.charts.setOnLoadCallback(drawChart );
 
 					}  )
 				 }//end if statement	 
@@ -99,6 +110,7 @@ createAnnualStatsDB  = (respondent ) =>{//PLACES I MIGHT BE ABLE TO USE INDEXED 
 			continue;
 		}
 		else{
+// 			console.log(respondent[x].data[0]);
 			db.stats.add({
 				playerID: respondent[x].data[0]["player_id"],
 				year: respondent[x].data[0]["season"],

@@ -91,6 +91,13 @@ p{
 	font-family: Josefin Sans;
 }
 
+#playerInfo{
+	color: #dfe6e9; 	
+}
+h1{
+	font-size: 40px;
+}
+
 h2{
 	color: #6fb3b8;
 	font-family: Josefin Sans;
