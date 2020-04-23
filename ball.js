@@ -1,5 +1,5 @@
 let apiEndpoint = "https://www.balldontlie.io/api/v1/players";
-var curSeason = 2019;	//?search=lebron_james - UNDERSCORE WORKS
+let curSeason = 2019;	//?search=lebron_james - UNDERSCORE WORKS
 
 var statTitles = ["Points", "Rebounds", "Assists", "Field Goal %", "3-Point Field Goal Percentage"];//, "Steals", "Blocks", "FG%", "3Pt FG%" 
 var statVars = ["points", "rebounds", "assists", "fgPercent", "threePercent"];
@@ -9,25 +9,30 @@ var yearlyPts = []; // the specific stat per year that feeds the 2D Array
 var urlArray = []; // all the urls to fetchALL promise shit
 
 var statTitle ;
-var PlayerName; 
+var playerName; 
 var playerPosition; 
 var playerTeam; 
 
 
-          // Define your database
-         
+//Vars for news screen
+let latestYear = 2020;
+let earliestYear = 2010;
+
+let firstName ;
+let lastName  ;
+      
+// Define your database         
 var db ;
-// = new Dexie("stats_database");
-// 	db.version(1).stores({
-// 		stats: '++entry, playerID, year, points, rebounds, assists, fgPercent, threePercent'
-//      });
-          
 
-
-
-createPlayerInfoBox = ()=>{
+createPlayerInfoBox = (pName)=>{
+	if(document.getElementById("playerInfo").querySelector('h1') != undefined){
+		let child = document.getElementById("playerInfo").childNodes[0]; 
+		document.getElementById("playerInfo").removeChild(child);
+	}
 	let nameElement = document.createElement('h1');
-	nameElement.textContent = playerName ;
+	console.log("making player box" + pName);
+	nameElement.textContent = pName ;
+	nameElement.style.textAlign = "center";
 	document.getElementById("playerInfo").appendChild(nameElement);
 }
 
@@ -35,6 +40,8 @@ createPlayerInfoBox = ()=>{
 // creates URLs for each api endpoint year, up til 2000
 // returns 2D array of years - points 
 // uses that to make a line chart for the statistic
+// 
+
 createDataChart = (stringStat)=>{
 	 let pName = document.getElementById("text-field-hero-input").value;
 	 
@@ -47,13 +54,17 @@ createDataChart = (stringStat)=>{
 	 fetch(nbaApi)
 		.then(response => {return response.json()   } ) 
 		.then(  json => {
-				 console.log("addam");
+// 				 console.log("addam");
 				 console.log(json);
 				var searchResultSize = json.meta["total_count"];
 		 		 
 				 if (searchResultSize == 1){// if that player exists
 					 document.getElementById("findPlayer").disabled = true;
+					 firstName = json.data[0]["first_name"]; 
+					 lastName = json.data[0]["last_name"];
 					 playerName = json.data[0]["first_name"] + " " + json.data[0]["last_name"];
+					 createPlayerInfoBox(playerName);
+					 
 					 playerTeam = json.data[0]["team"]["full_name"];
 					 playerPosition = json.data[0]["position"];
 // 					 createPlayerInfoBox();
@@ -72,6 +83,7 @@ createDataChart = (stringStat)=>{
 						 // go to next screen
 						document.body.style.backgroundColor = "#436372";
 						document.querySelector("#searchScreen").style.display = "none";
+						document.querySelector("#thirdScreen").style.display = "block";
 						document.querySelector("#buttonsScreen").style.display = "block";
 
 					}  )
@@ -79,7 +91,8 @@ createDataChart = (stringStat)=>{
 				 else if(searchResultSize == 0){ //account for CASE that name/id does not exist	
 					 // stay on search screen
 					 document.querySelector("#searchScreen").style.display = "block";
-						document.querySelector("#buttonsScreen").style.display = "none";
+						document.querySelector("#thirdScreen").style.display = "none";
+					 document.querySelector("#buttonsScreen").style.display = "none";
 					let p1 = document.createElement("p");
 					p1.textContent = "Whoops, player does not exist, check spelling";
 					document.getElementById("addValuesHere").appendChild(p1);
@@ -93,6 +106,9 @@ createDataChart = (stringStat)=>{
 					
 				 }
 		})
+	
+	
+		
 }
 
 
@@ -102,7 +118,7 @@ createAnnualStatsDB  = (respondent ) =>{//PLACES I MIGHT BE ABLE TO USE INDEXED 
 // 	IDEA: OPTIMIZE LATER
 	for(var x = 0; x < respondent.length; x++){
 		if(respondent[x].data[0] == undefined){ 
-			console.log("undefined found at year " + x);
+// 			console.log("undefined found at year " + x);
 			continue;
 		}
 		else{
@@ -123,19 +139,19 @@ createAnnualStatsDB  = (respondent ) =>{//PLACES I MIGHT BE ABLE TO USE INDEXED 
 
 
 turnDBtoArray = (stringStat) =>{
-		console.log(stringStat);
+// 		console.log(stringStat);
 		var tempArr = [];
 		var TwoDArr = [];
 	
 		TwoDArr.push(['Year', stringStat]);
-		console.log("inside turnDBtoArray function ");
+// 		console.log("inside turnDBtoArray function ");
 		var curYear ;// = respondent[x].data[0]["season"];
 		var curYearString;// = curYear.toString();
 		var newArr;
 		db.stats.toArray()
 		.then( (arr)=> {
 			for(var i = 0 ; i < arr.length; ++i){
-				console.log("get done to business");
+// 				console.log("get done to business");
 				curYear = arr[i]["year"];
 				curYearString = curYear.toString();
 				
@@ -201,8 +217,8 @@ spaceRemover = (pName) =>{
       
 let topPlayers = ["Andrew Wiggins", "Terrence Ross", "DeAndre Jordan", "Jarrett Allen", "Kyle Kuzma", "Joe Harris",
 					"Dejounte Murray", "Bam Adebayo", "Spencer Dinwiddie", "Derrick White", "Zach LaVine", "Danny Green",
-					"Jonas Valančiūnas", "Jeff Teague", "Dwight Howard", "Andre Iguodala", "Brandon Ingram", "Al-Farouq Aminu", "Jaren Jackson Jr.", 
-					"Marcus Smart", "Patrick Beverley", "Serge Ibaka", "Julius Randle", "Jusuf Nurkić", "Montrezl Harrell",
+					"Jonas Valanciunas", "Jeff Teague", "Dwight Howard", "Andre Iguodala", "Brandon Ingram", "Al-Farouq Aminu", "Jaren Jackson Jr.", 
+					"Marcus Smart", "Patrick Beverley", "Serge Ibaka", "Julius Randle", "Jusuf Nurkic", "Montrezl Harrell",
 					"Domantas Sabonis", "Lauri Markkanen", "P.J. Tucker", "Ricky Rubio", "Harrison Barnes", "Josh Richardson",
 					"Thaddeus Young", "Caris LeVert", "Jaylen Brown", "JJ Redick", "Brook Lopez", "Joe Ingles", "Robert Covington",
 					 "Eric Gordon", "Trae Young", "Malcolm Brogdon", "Ray Allen", "Paul Pierce", "Rajon Rondo", 
@@ -211,10 +227,10 @@ let topPlayers = ["Andrew Wiggins", "Terrence Ross", "DeAndre Jordan", "Jarrett 
 					 "Tobias Harris", "Gary Harris", "Myles Turner", "Eric Bledsoe", "Nikola Vucevic", "D'Angelo Russell",
 					"Paul Millsap", "Marc Gasol", "Pau Gasol", "Kevin Love", "Steven Adams", "Victor Oladipo", "Jamal Murray", 
 					"Kristaps Porzingis", "Andre Drummond", "Jayson Tatum",  "Devin Booker", "De'Aaron Fox", "CJ McCollum",
-					 "DeMar DeRozan", "Luka Dončić", "Donovan Mitchell","Tony Parker", "Manu Ginobili", "Kyle Lowry","Khris Middleton", "Mike Conley",
+					 "DeMar DeRozan", "Luka Doncic", "Donovan Mitchell","Tony Parker", "Manu Ginobili", "Kyle Lowry","Khris Middleton", "Mike Conley",
 					 "Jrue Holiday", "Pascal Siakam", "Ben Simmons", "Bradley Beal", "Chris Paul", "Kemba Walker", "John Wall", "DeMarcus Cousins",
 					"Blake Griffin", "Al Horford", "Draymond Green", "Yao Ming", "Carmelo Anthony", "LaMarcus Aldridge", "Kyrie Irving","Rudy Gobert","Karl-Anthony Towns","Russell Westbrook",
-					 "Jimmy Butler", "Damian Lillard", "Paul George", "Nikola Jokic", "Tracy McGrady","Joel Embiid", "Kevin Garnett", "Jason Kidd", "Steven Nash",
+					 "Jimmy Butler", "Damian Lillard", "Paul George", "Nikola Jokic", "Tracy McGrady","Joel Embiid", "Kevin Garnett", "Jason Kidd", "Steve Nash",
 				     "Tim Duncan", "Allen Iverson",  "Dwyane Wade",  "Vince Carter", "Dirk Nowitzki", "Shaquille O'Neal", "Kobe Bryant",  "Anthony Davis","James Harden",
 					"Stephen Curry", "Kevin Durant", "LeBron James", "Kawhi Leonard", "Giannis Antetokounmpo"]
 console.log("Data List from https://www.si.com/nba/2019/09/12/top-100-nba-players-2020 and some NBA legends of the 2000s that I chose");
@@ -226,14 +242,12 @@ createSearchList = () => {
 		dataOption.value = topPlayers[i];
 		document.getElementById("browsers").appendChild(dataOption);
 	}
-	
-	
 }
 
 
 drawChart = ()=> {
 	
-	console.log("in drawChart");
+// 	console.log("in drawChart");
 	console.log(dataArr);
 	var vAxis2 ;
 	 if(statTitle == "3-Point Field Goal Percentage" || statTitle == "Field Goal %" ){
@@ -259,6 +273,85 @@ drawChart = ()=> {
         chart.draw(data, options);
 		
       }
+//
+//Functions for practice with fetching data from New York Times API 
+//
+
+		
+
+
+
+
+
+
+// 		let fullName = firstName + " " + lastName; use PlayerName
+// 		let teamCity; 
+// 		let teamName = "Golden State Warriors";
+// 		
+// 		
+// 		
+// 		
+// 		
+// 		NOTES
+addNews = () =>{		
+			let chosenYear = document.getElementById("text-field-year").value;
+			let startDate = chosenYear + "0101"
+			let endDate = chosenYear + "1231";
+	//might split fetching into 2 groups jan - june and july to dec - get more articels
+	//
+			let apiEnd = "https://api.nytimes.com/svc/search/v2/articlesearch.json?"+
+						 "q="+ playerName + "&sort=relevance"+ "&news_desk=Sports&subsection_name=Pro Basketball&begin_date=" +startDate +"&end_date=" + endDate+ 
+						  "&api-key=QQfhX8AwGLRGftX9LXGeoYyszg2BM4fw";
+			let articleCount = 0;
+			fetch(apiEnd)
+				.then(response => { return response.json() } ) 
+				.then(json => {
+					console.log(json);
+					console.log(json["response"]["docs"] );
+	// 				console.log(json["response"]["docs"][0]["abstract"])
+					for(var i =0 ; i < json["response"]["docs"].length; ++i){
+						if( (json["response"]["docs"][i]["abstract"].includes(lastName) ||
+						   json["response"]["docs"][i]["headline"]["main"].includes(playerName) )||
+						   json["response"]["docs"][i]["lead_paragraph"].includes(playerName ) ){
+							let p1 = document.createElement("p");
+							p1.textContent =  json["response"]["docs"][i]["abstract"] + " " + json["response"]["docs"][i]["byline"]["original"]  ;
+							//need to do pub date too to double check things are in order
+							
+							console.log(p1);
+							p1.style.color = "white";
+							document.getElementById("addNewsHere").appendChild(p1);
+							articleCount++ ;
+						}
+
+					}
+					if(articleCount == 0){
+						document.getElementById("addNewsHere").appendChild("No New York Times articles related to "+ playerName + "in the year " + chosenYear );
+					}
+			})
+}//end function 
+
+
+document.getElementById("findNews").addEventListener("click", (e)=>{
+	addNews(); 
+	
+	
+	
+	
+} )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // buttons to bring up different graphs
@@ -287,10 +380,8 @@ clickedBtn = () =>{
 	
 }
 
-//Initial Screen Displays -which are on and off
-document.querySelector("#infoScreen").style.display = "block";
-document.querySelector("#searchScreen").style.display = "none";
-document.querySelector("#buttonsScreen").style.display = "none";
+//Initial Screen Displays -which are on and off was actually dumb -just style inside divs// document.querySelector("#infoScreen").style.display = "block";
+ 
 
 // Screen Transitions from Info Screen to Searching Screen
 document.getElementById("goSearch").addEventListener("click",  (e)=> {  
@@ -303,29 +394,61 @@ document.getElementById("goSearch").addEventListener("click",  (e)=> {
 
 // Find Player Button creates graph 
 document.getElementById("findPlayer").addEventListener("click",  (e)=> {
+			
 			console.log("Find Player button clicked");
 			
 			db = new Dexie("stats_database"); 
 			db.version(1).stores({
 				stats: '++entry, playerID, year, points, rebounds, assists, fgPercent, threePercent'
 			 });
+			
 			statTitle = statTitles[0];
 			createDataChart("points"); 					
-		})
+			
+})
 
 
 
 //Search Again Button 
 
 document.getElementById("searchAgain").addEventListener("click",  (e)=> {
+			
 			console.log("search Again button clicked");
 			Dexie.delete('stats_database');
 			document.getElementById("findPlayer").disabled = false;
 			document.body.style.backgroundColor = "#f6f6f2";
 			
 			document.getElementById("text-field-hero-input").value = "";
-			document.querySelector("#buttonsScreen").style.display =  "none";
+			document.querySelector("#thirdScreen").style.display =  "none";
 			document.querySelector("#searchScreen").style.display = "block";
 		})
 
+
+//Event Handlers for Tabs 
+document.getElementById("getStats").addEventListener("click",  (e)=> {
+	document.querySelector("#newsScreen").style.display =  "none";
+	document.querySelector("#buttonsScreen").style.display =  "block";
+})
+
+var listGenerated = false;
+
+document.getElementById("getNews").addEventListener("click",  (e)=> {
+// 	document.body.style.backgroundColor = "#ffffff";
+	document.querySelector("#buttonsScreen").style.display =  "none";
+	document.querySelector("#newsScreen").style.display =  "block";
+	if(listGenerated == false){
+		let years = ["2015", "2016", "2017", "2018", "2019", "2020"];
+		for(var i = 0 ; i < years.length; ++i){
+			let dataOption2 = document.createElement("option");
+			dataOption2.value = years[i];
+			document.getElementById("years").appendChild(dataOption2);
+		}
+		listGenerated = true;
+	}
+
+})			
+
+
+
 clickedBtn();
+

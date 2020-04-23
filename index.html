@@ -31,13 +31,13 @@
 </head>	
 
 <body>
-	
+<!-- 	 SCREEN 1    -->
 	<div id="infoScreen">
 		
-		<h2> NBA Player Stats Tracker</h2>
+		<h2> NBA Player Progress Tracker</h2>
 		<p>  1) Enter the name of an NBA Player </p>
 		<p>  2) Visualize their career statistics in line chart form</p>
-		
+		<p>  3) Read about their career highlights in the NY Times</p>
 		<button id="goSearch" class="mdc-button mdc-button--raised">
 		  <div class="mdc-button__ripple"></div>
 		  <span class="mdc-button__label">Begin Search</span>
@@ -46,8 +46,13 @@
 	</div>
 	
 	
-<!-- 	 Step 1. Ask for Name of Player or Players-->
-	<div id="searchScreen">
+	
+	
+	
+	
+	
+<!-- 	 SCREEN 2. Ask for Name of Player -->
+	<div id="searchScreen" style="display: none;">
 		
 			<div  class="row">
 				<h4>Search for a player </h4>	
@@ -58,7 +63,6 @@
 				<div id="nameSearch" class="mdc-text-field mdc-text-field--outlined">
 
 				  <input   class="mdc-text-field__input" list="browsers" id="text-field-hero-input">
-<!-- 					//size="50" -->
 				  <div class="mdc-notched-outline">
 					<div class="mdc-notched-outline__leading"></div>
 					<div class="mdc-notched-outline__notch">
@@ -78,14 +82,14 @@
 				  <div class="mdc-button__ripple"></div>
 				  <span class="mdc-button__label">Find Player</span>
 				</button>
-				
+			
 			</div>
 
-			
-		
+	
 			<div  class="row">
 				<div id="addValuesHere"> </div> 
 			</div>	
+
 		
 	</div>
 	
@@ -94,12 +98,56 @@
 	
 	
 	
-	<div id="buttonsScreen">
-		<div id="playerInfo"class="row">
+	
+	
+<!-- 	SCREEN 3 - split between stats and news -->
+	<div id="thirdScreen" style="display: none;">
 		
+		<div id="playerInfo" class="row"></div>
+		
+		<div class="mdc-tab-bar" role="tablist">
+		  <div class="mdc-tab-scroller">
+			<div class="mdc-tab-scroller__scroll-area">
+			  <div class="mdc-tab-scroller__scroll-content">
+				  
+				  
+				<button id="getStats" 
+						class="mdc-tab mdc-tab--active" role="tab" aria-selected="true" tabindex="0">
+				  <span class="mdc-tab__content">
+					<span class="mdc-tab__text-label">Player Stats</span>
+				  </span>
+				  	 
+				  <span class="mdc-tab-indicator mdc-tab-indicator--active">
+					<span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+				  </span>
+				  <span class="mdc-tab__ripple"></span>
+				</button>
+				  
+				
+				  
+				<button id="getNews"
+						class="mdc-tab mdc-tab--active" role="tab" aria-selected="true" tabindex="0">
+				  <span class="mdc-tab__content">
+					<span class="mdc-tab__text-label">Player News</span>
+				  </span>
+				  	 
+				  <span class="mdc-tab-indicator mdc-tab-indicator--active">
+					<span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+				  </span>
+				  <span class="mdc-tab__ripple"></span>
+				</button>  
+				  
+				  
+			  </div>
+			</div>
+		  </div>
 		</div>
 		
 		
+		
+<!-- 		Side that has stats -->
+		<div id="buttonsScreen" style="display: none;" >
+			
 		<div class="row">
 			<h3> Choose what kind of graph: </h3>
 		</div>
@@ -132,11 +180,11 @@
 				</button>
 			</div>
 			
-	</div> <!-- 		end buttons div -->
+		</div> 
 		
 		
 		<div id="chartArea"  class="row">
-			<div id="curve_chart" style=" width: 450px; height: 250px"></div>
+			<div id="curve_chart" style=" width: 600px; height: 300px"></div>
 		</div>
 		
 		<div class="row">
@@ -147,7 +195,64 @@
 		</div>
 	
 	
-	</div>
+		</div><!-- 	End of Buttons Screen -->
+		
+		
+		<!-- 		Side that has news -->
+		<div id="newsScreen" style="display: none;" >
+				<h3>Select a Year</h3>
+			
+<!-- 				<div id="monthSearch" class="mdc-text-field mdc-text-field--outlined">
+
+				  <input class="mdc-text-field__input" list="months" id="text-field-hero-input2">
+				  <div class="mdc-notched-outline">
+						<div class="mdc-notched-outline__leading"></div>
+						<div class="mdc-notched-outline__notch">
+						  <label for="text-field-hero-input" class="mdc-floating-label"></label>
+						</div>
+						<div class="mdc-notched-outline__trailing"></div>
+				
+				  </div>
+				</div>	
+				<datalist id="months"> </datalist>	 -->
+			
+			
+			
+				<div id="yearSearch" class="mdc-text-field mdc-text-field--outlined">
+
+				  <input class="mdc-text-field__input" list="years" id="text-field-year">
+				  <div class="mdc-notched-outline">
+						<div class="mdc-notched-outline__leading"></div>
+						<div class="mdc-notched-outline__notch">
+						  <label for="text-field-hero-input" class="mdc-floating-label"></label>
+						</div>
+						<div class="mdc-notched-outline__trailing"></div>
+					  
+				  </div>
+				</div>	
+				<datalist id="years"> </datalist>
+			
+			
+				<button id="findNews" class="mdc-button mdc-button--raised">
+				  <div class="mdc-button__ripple"></div>
+				  <span class="mdc-button__label">Find News</span>
+				</button>
+				
+			
+			
+			<div id ="addNewsHere" ></div>
+			
+			<div class="row">
+			<button id="searchAgain" class="mdc-button mdc-button--raised fifth-r">
+				  <div class="mdc-button__ripple"></div>
+				  <span class="mdc-button__label">Search Again</span>
+				</button>
+		</div>
+			
+		</div>
+		
+	</div> <!-- 	End of Third Screen -->
+
 
 <script src = "ball.js">	</script> 
 

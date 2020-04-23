@@ -11,6 +11,9 @@
 	text-align: center;
 }
 
+
+
+
 #infoScreen{
 	text-align: center;	
 	position: fixed;
@@ -35,6 +38,7 @@
 	text-align: center;
 	margin-bottom: 5px;
 }
+
 #addValuesHere{
 /* 	 does not center graph for some reason */
 	text-align: center;
@@ -63,6 +67,11 @@
 .option{
 	size: 50;
 }
+
+#findNews{
+	color: #dff9fb;
+	background-color: #2d3436;
+}
 #pts{
 	color: #dff9fb;
 	background-color: #2d3436;
@@ -71,7 +80,6 @@
 	color: #dff9fb;
 	background-color: #2d3436;
 }
-
 #ast{
 	color: #dff9fb;
 	background-color: #2d3436;
@@ -132,4 +140,69 @@ body{
 	justify-content: center;
 	align-items: center;
 /* 	background-color: #6fb3b8; */
+}
+
+
+/* element.style {
+}
+.mdc-tab__ripple {
+    --mdc-ripple-fg-size: 0;
+    --mdc-ripple-left: 0;
+    --mdc-ripple-top: 0;
+    --mdc-ripple-fg-scale: 1;
+    --mdc-ripple-fg-translate-end: 0;
+    --mdc-ripple-fg-translate-start: 0;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+.mdc-tab {
+    font-family: Roboto, sans-serif;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-size: .875rem;
+    line-height: 2.25rem;
+    font-weight: 500;
+    letter-spacing: .0892857143em;
+    text-decoration: none;
+    text-transform: uppercase;
+    padding-right: 24px;
+    padding-left: 24px;
+    position: relative;
+    display: flex;
+    flex: 1 0 auto;
+    justify-content: center;
+    box-sizing: border-box;
+    margin: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    border: none;
+    outline: none;
+    background: none;
+    text-align: center;
+    white-space: nowrap;
+    cursor: pointer;
+    -webkit-appearance: none;
+    z-index: 1;
+}
+user agent stylesheet
+button {
+    -webkit-writing-mode: horizontal-tb !important;
+    text-rendering: auto;
+    color: buttontext;
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    text-align: center;
+    cursor: default;
+    font: 400 13.3333px Arial;
+} */
+:root {
+    --mdc-theme-primary: #18dcff;
 }
