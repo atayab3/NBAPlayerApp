@@ -36,11 +36,11 @@ createPlayerInfoBox = (pName)=>{
 	document.getElementById("playerInfo").appendChild(nameElement);
 }
 
+
 //Searches for name with underscore
 // creates URLs for each api endpoint year, up til 2000
 // returns 2D array of years - points 
 // uses that to make a line chart for the statistic
-// 
 
 createDataChart = (stringStat)=>{
 	 let pName = document.getElementById("text-field-hero-input").value;
@@ -67,9 +67,7 @@ createDataChart = (stringStat)=>{
 					 
 					 playerTeam = json.data[0]["team"]["full_name"];
 					 playerPosition = json.data[0]["position"];
-// 					 createPlayerInfoBox();
-// 					 
-// 					 
+ 					 
 					 playerID = json.data[0]["id"];
 					 urlArray = getUrls(playerID, curSeason);
 					 
@@ -79,7 +77,6 @@ createDataChart = (stringStat)=>{
 					createAnnualStatsDB(responses);
 					
 					dataArr = turnDBtoArray(stringStat);
-				 
 						 // go to next screen
 						document.body.style.backgroundColor = "#436372";
 						document.querySelector("#searchScreen").style.display = "none";
@@ -105,13 +102,8 @@ createDataChart = (stringStat)=>{
 					 console.log("Multiple players with this name exist, further action required");	
 					
 				 }
-		})
-	
-	
-		
+		})		
 }
-
-
 
 createAnnualStatsDB  = (respondent ) =>{//PLACES I MIGHT BE ABLE TO USE INDEXED DB TO STOP FETCHING 
 
@@ -122,7 +114,6 @@ createAnnualStatsDB  = (respondent ) =>{//PLACES I MIGHT BE ABLE TO USE INDEXED 
 			continue;
 		}
 		else{
-// 			console.log(respondent[x].data[0]);
 			db.stats.add({
 				playerID: respondent[x].data[0]["player_id"],
 				year: respondent[x].data[0]["season"],
@@ -134,50 +125,33 @@ createAnnualStatsDB  = (respondent ) =>{//PLACES I MIGHT BE ABLE TO USE INDEXED 
 			})
 		} // end else	
 	} // end for loop 
-	
 } 
 
-
 turnDBtoArray = (stringStat) =>{
-// 		console.log(stringStat);
 		var tempArr = [];
 		var TwoDArr = [];
 	
 		TwoDArr.push(['Year', stringStat]);
-// 		console.log("inside turnDBtoArray function ");
 		var curYear ;// = respondent[x].data[0]["season"];
 		var curYearString;// = curYear.toString();
 		var newArr;
 		db.stats.toArray()
 		.then( (arr)=> {
 			for(var i = 0 ; i < arr.length; ++i){
-// 				console.log("get done to business");
 				curYear = arr[i]["year"];
 				curYearString = curYear.toString();
 				
 				tempArr = [curYearString, arr[i][stringStat] ]; // need to put String Stat here
 				TwoDArr.push(tempArr);
-
 				
 			}
 				console.log(TwoDArr);
 				dataArr = TwoDArr;
 				google.charts.load('current', {'packages':['corechart']});
 				google.charts.setOnLoadCallback(drawChart ); 
-	} )
+	}  )
 	return TwoDArr; 
 }
-
-// retrieveDBInfo = () => {
-// 	// Let us open our database
-// 	let x ;
-// db.stats.get(1, function (firstYear) {
-// 	x = firstYear.points
-//     console.log("Points with id 1: " + firstYear.points);
-// });
-// 	console.log("what is x in retrieveDBInfo");
-// 	console.log(x);
-// }
 
 // returns array of URLS with a specific player(ID) from the current season all the way to 2011
 getUrls = (playerId, curSeason ) =>{
@@ -273,32 +247,13 @@ drawChart = ()=> {
         chart.draw(data, options);
 		
       }
-//
-//Functions for practice with fetching data from New York Times API 
-//
 
-		
-
-
-
-
-
-
-// 		let fullName = firstName + " " + lastName; use PlayerName
-// 		let teamCity; 
-// 		let teamName = "Golden State Warriors";
-// 		
-// 		
-// 		
-// 		
-// 		
 // 		NOTES
-addNews = () =>{		
+addNews = () =>{			
 			let chosenYear = document.getElementById("text-field-year").value;
 			let startDate = chosenYear + "0101"
 			let endDate = chosenYear + "1231";
-	//might split fetching into 2 groups jan - june and july to dec - get more articels
-	//
+
 			let apiEnd = "https://api.nytimes.com/svc/search/v2/articlesearch.json?"+
 						 "q="+ playerName + "&sort=relevance"+ "&news_desk=Sports&subsection_name=Pro Basketball&begin_date=" +startDate +"&end_date=" + endDate+ 
 						  "&api-key=QQfhX8AwGLRGftX9LXGeoYyszg2BM4fw";
@@ -308,24 +263,47 @@ addNews = () =>{
 				.then(json => {
 					console.log(json);
 					console.log(json["response"]["docs"] );
-	// 				console.log(json["response"]["docs"][0]["abstract"])
 					for(var i =0 ; i < json["response"]["docs"].length; ++i){
 						if( (json["response"]["docs"][i]["abstract"].includes(lastName) ||
-						   json["response"]["docs"][i]["headline"]["main"].includes(playerName) )||
+						   json["response"]["docs"][i]["headline"]["main"].includes(playerName) ) || 
 						   json["response"]["docs"][i]["lead_paragraph"].includes(playerName ) ){
-							let p1 = document.createElement("p");
-							p1.textContent =  json["response"]["docs"][i]["abstract"] + " " + json["response"]["docs"][i]["byline"]["original"]  ;
-							//need to do pub date too to double check things are in order
 							
-							console.log(p1);
-							p1.style.color = "white";
-							document.getElementById("addNewsHere").appendChild(p1);
+							let clone = document.querySelector(".template").cloneNode(true);
+							console.log("adam is a cool guy");
+							console.log(clone);
+// 							<img src="https://www.your-image-source.com/your-image.jpg">
+// 							console.log(json["response"]["docs"][i]["multimedia"][0]["url"]);
+							clone.querySelector("img").src = "https://static01.nyt.com/" + json["response"]["docs"][i]["multimedia"][0]["url"] ; 
+							clone.querySelector("h2").textContent = json["response"]["docs"][i]["headline"]["main"];
+							clone.querySelector("h3").textContent = json["response"]["docs"][i]["byline"]["original"]  ;
+							clone.querySelector("h3").style.color = "black";
+							clone.querySelector("h5").textContent = json["response"]["docs"][i]["pub_date"].substring(0,10);
+							
+							
+// 							https://static01.nyt.com/images/2020/03/06/sports/06nba-warriorsraptors-lede/merlin_170093685_a826ab71-230f-4103-9f4d-7e4e1e20a38e-mobileMasterAt3x.jpg
+							clone.querySelector("p").textContent = json["response"]["docs"][i]["abstract"];
+							let webURL =  json["response"]["docs"][i]["web_url"];
+							
+							clone.querySelector("button").addEventListener("click", (e)=>{
+								window.open(webURL); })
+							
+							clone.classList.remove("template"); // so no longer hidden like in style element for first demo card already in index
+							
+							clone.style.textAlign = "center";
+							
+							document.getElementById("addNewsHere").appendChild(clone);
+							linebreak = document.createElement("br");
+							document.getElementById("addNewsHere").appendChild(linebreak);
+							document.getElementById("addNewsHere").appendChild(linebreak);
 							articleCount++ ;
+							
 						}
-
 					}
 					if(articleCount == 0){
-						document.getElementById("addNewsHere").appendChild("No New York Times articles related to "+ playerName + "in the year " + chosenYear );
+						let result = document.createElement('p');
+						result.textContent = "No New York Times articles related to "+ playerName + "in the year " + chosenYear;
+						result.style.color = "white"; 
+						document.getElementById("addNewsHere").appendChild( result );
 					}
 			})
 }//end function 
@@ -333,26 +311,7 @@ addNews = () =>{
 
 document.getElementById("findNews").addEventListener("click", (e)=>{
 	addNews(); 
-	
-	
-	
-	
 } )
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // buttons to bring up different graphs
 clickedBtn = () =>{
@@ -382,7 +341,6 @@ clickedBtn = () =>{
 
 //Initial Screen Displays -which are on and off was actually dumb -just style inside divs// document.querySelector("#infoScreen").style.display = "block";
  
-
 // Screen Transitions from Info Screen to Searching Screen
 document.getElementById("goSearch").addEventListener("click",  (e)=> {  
 			Dexie.delete('stats_database');
@@ -403,11 +361,8 @@ document.getElementById("findPlayer").addEventListener("click",  (e)=> {
 			 });
 			
 			statTitle = statTitles[0];
-			createDataChart("points"); 					
-			
+			createDataChart("points"); 								
 })
-
-
 
 //Search Again Button 
 
@@ -422,6 +377,19 @@ document.getElementById("searchAgain").addEventListener("click",  (e)=> {
 			document.querySelector("#thirdScreen").style.display =  "none";
 			document.querySelector("#searchScreen").style.display = "block";
 		})
+
+document.getElementById("searchAgain2").addEventListener("click",  (e)=> {
+			
+			console.log("search Again 2 button clicked");
+			Dexie.delete('stats_database');
+			document.getElementById("findPlayer").disabled = false;
+			document.body.style.backgroundColor = "#f6f6f2";
+			
+			document.getElementById("text-field-hero-input").value = "";
+			document.querySelector("#thirdScreen").style.display =  "none";
+			document.querySelector("#searchScreen").style.display = "block";
+		})
+
 
 
 //Event Handlers for Tabs 
@@ -444,11 +412,12 @@ document.getElementById("getNews").addEventListener("click",  (e)=> {
 			document.getElementById("years").appendChild(dataOption2);
 		}
 		listGenerated = true;
+		
+		let opener = document.createElement('p');
+		opener.textContent = "Mentions of "+ playerName + " in the New York Times";
+		opener.style.color = "white"; 
+		opener.style.textAlign = "center";
+		document.getElementById("addNewsHere").appendChild( opener );
 	}
-
 })			
-
-
-
 clickedBtn();
-
