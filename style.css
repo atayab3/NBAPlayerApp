@@ -9,6 +9,10 @@
 #searchScreen{
 	display: none;
 	text-align: center;
+	position: fixed;
+    top: 40%;
+    left: 50%;
+  	transform: translate(-50%, -50%); 
 }
 #searchAgain2{
 	color: #dff9fb;	
@@ -25,13 +29,13 @@
 }
 
 .mdc-card {
-    width: 45%;
-	margin-left: 25%; 
+    width: 100%;
+/* 	margin-left: 25%;  */
 }
 
 .mdc-card__primary-action::before, .mdc-card__primary-action::after{
-	
-	margin-left: 20px;
+/* 	
+	margin-left: 20px; */
 }
 
 
