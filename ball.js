@@ -33,6 +33,7 @@ createPlayerInfoBox = (pName)=>{
 	console.log("making player box" + pName);
 	nameElement.textContent = pName ;
 	nameElement.style.textAlign = "center";
+	
 	document.getElementById("playerInfo").appendChild(nameElement);
 }
 
@@ -82,6 +83,9 @@ createDataChart = (stringStat)=>{
 						document.querySelector("#searchScreen").style.display = "none";
 						document.querySelector("#thirdScreen").style.display = "block";
 						document.querySelector("#buttonsScreen").style.display = "block";
+						 document.querySelector("#newsScreen").style.display = "none";
+						 
+ 
 
 					}  )
 				 }//end if statement	 
@@ -275,26 +279,35 @@ addNews = () =>{
 // 							console.log(json["response"]["docs"][i]["multimedia"][0]["url"]);
 							clone.querySelector("img").src = "https://static01.nyt.com/" + json["response"]["docs"][i]["multimedia"][0]["url"] ; 
 							clone.querySelector("h2").textContent = json["response"]["docs"][i]["headline"]["main"];
-							clone.querySelector("h3").textContent = json["response"]["docs"][i]["byline"]["original"]  ;
-							clone.querySelector("h3").style.color = "black";
-							clone.querySelector("h5").textContent = json["response"]["docs"][i]["pub_date"].substring(0,10);
+							clone.querySelector("h2").style.color = "white";
+							clone.querySelector("h2").style.fontFamily = "News Cycle";
+// 							clone.querySelector("h2").style.fontSize = "20px";
 							
+							clone.querySelector("h3").textContent = json["response"]["docs"][i]["byline"]["original"]  ;
+							clone.querySelector("h3").style.color = "white";
+							clone.querySelector("h3").style.fontFamily = "News Cycle";
+							
+							clone.querySelector("h5").textContent = json["response"]["docs"][i]["pub_date"].substring(0,10);
+							clone.querySelector("h5").style.color = "white";
+							clone.querySelector("h5").style.fontFamily = "News Cycle";
 							
 // 							https://static01.nyt.com/images/2020/03/06/sports/06nba-warriorsraptors-lede/merlin_170093685_a826ab71-230f-4103-9f4d-7e4e1e20a38e-mobileMasterAt3x.jpg
 							clone.querySelector("p").textContent = json["response"]["docs"][i]["abstract"];
+							clone.querySelector("p").style.color = "white";
+							clone.querySelector("p").style.fontFamily = "News Cycle";
+							
 							let webURL =  json["response"]["docs"][i]["web_url"];
 							
-							clone.querySelector("button").addEventListener("click", (e)=>{
-								window.open(webURL); })
+							clone.querySelector("button").addEventListener("click", (e)=>{window.open(webURL); })
 							
 							clone.classList.remove("template"); // so no longer hidden like in style element for first demo card already in index
 							
 							clone.style.textAlign = "center";
-							
+							clone.style.marginBottom = "20px"; 
 							document.getElementById("addNewsHere").appendChild(clone);
-							linebreak = document.createElement("br");
-							document.getElementById("addNewsHere").appendChild(linebreak);
-							document.getElementById("addNewsHere").appendChild(linebreak);
+// 							linebreak = document.createElement("br");
+// 							document.getElementById("addNewsHere").appendChild(linebreak);
+// 							document.getElementById("addNewsHere").appendChild(linebreak);
 							articleCount++ ;
 							
 						}
@@ -308,6 +321,31 @@ addNews = () =>{
 			})
 }//end function 
 
+
+clearNews = () =>{
+// 	console.log(document.getElementById("addNewsHere").querySelectorAll(".mdc-card__primary-action").length ) ;
+// 	console.log("in clearNews1"); 
+// 	console.log(document.getElementById("addNewsHere").querySelectorAll("mdc-card__primary-action demo-card__primary-action").length ) ;
+// 	console.log("in clearNews2"); 
+// 	console.log(document.querySelectorAll(".mdc-card__primary-action demo-card__primary-action").length ) ;
+// 	console.log("in clearNews3"); 
+// 	console.log(document.querySelectorAll("mdc-card__primary-action demo-card__primary-action").length ) ;
+// 	console.log("in clearNews4"); 
+// 	console.log(document.getElementById("addNewsHere").querySelectorAll(".img").length ) ;
+	console.log("in clearNews5"); 
+	console.log(document.getElementById("newsScreen").querySelectorAll("mdc-card demo-card").length ) ;
+// 	console.log("in clearNews6"); 
+// 	console.log(document.querySelectorAll(".img").length ) ;
+// 	console.log("in clearNews7"); 
+// 	console.log(document.querySelectorAll("img").length ) ;
+	for(var i = 0; i < document.getElementById("addNewsHere").querySelectorAll("mdc-card demo-card").length; ++i){
+		console.log(i);
+		let child = document.getElementById("addNewsHere").querySelector("mdc-card demo-card");
+		console.log(child);
+		document.getElementById("addNewsHere").removeChild(child);
+	}
+	
+}
 
 document.getElementById("findNews").addEventListener("click", (e)=>{
 	addNews(); 
@@ -347,6 +385,8 @@ document.getElementById("goSearch").addEventListener("click",  (e)=> {
 			createSearchList();
 			document.querySelector("#infoScreen").style.display =  "none";
 			document.querySelector("#searchScreen").style.display = "block";
+	
+	
 	
 } )
 
@@ -388,6 +428,7 @@ document.getElementById("searchAgain2").addEventListener("click",  (e)=> {
 			document.getElementById("text-field-hero-input").value = "";
 			document.querySelector("#thirdScreen").style.display =  "none";
 			document.querySelector("#searchScreen").style.display = "block";
+			clearNews();
 		})
 
 
@@ -405,10 +446,10 @@ document.getElementById("getNews").addEventListener("click",  (e)=> {
 	document.querySelector("#buttonsScreen").style.display =  "none";
 	document.querySelector("#newsScreen").style.display =  "block";
 	if(listGenerated == false){
-		let years = ["2015", "2016", "2017", "2018", "2019", "2020"];
-		for(var i = 0 ; i < years.length; ++i){
+// 		let years = ["2015", "2016", "2017", "2018", "2019", "2020"];
+		for(var i = 2010 ; i <= 2020; ++i){
 			let dataOption2 = document.createElement("option");
-			dataOption2.value = years[i];
+			dataOption2.value =  i //years[i];
 			document.getElementById("years").appendChild(dataOption2);
 		}
 		listGenerated = true;
@@ -419,5 +460,8 @@ document.getElementById("getNews").addEventListener("click",  (e)=> {
 		opener.style.textAlign = "center";
 		document.getElementById("addNewsHere").appendChild( opener );
 	}
+	
+	
+	
 })			
 clickedBtn();

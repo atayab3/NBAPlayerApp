@@ -3,7 +3,8 @@
 <head>
 	
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width">
+<!-- 	<meta name="viewport" content="width=device-width"> -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Final Project</title>
 	
 <!-- Include Dexie -->
@@ -25,7 +26,7 @@
 	
 	
 <!-- 	GOOGLE FONTS -->
-	<link rel="stylesheet"href="https://fonts.googleapis.com/css?family=Roboto Condensed|Josefin Sans" >
+	<link rel="stylesheet"href="https://fonts.googleapis.com/css?family=Roboto Condensed|Josefin Sans|Cinzel Decorative|Source Code Pro|News Cycle" >
 	
 	
 </head>	
@@ -35,7 +36,7 @@
 	<div id="infoScreen">
 		
 		<h2> NBA Player Progress Tracker</h2>
-		<p>  1) Enter the name of an NBA Player </p>
+		<p>  1) Enter the name of an NBA Player from 1996-present </p>
 		<p>  2) Visualize their career statistics in line chart form</p>
 		<p>  3) Read about their career highlights in the NY Times</p>
 		<button id="goSearch" class="mdc-button mdc-button--raised">
@@ -44,12 +45,7 @@
 		</button>
 		
 	</div>
-	
-	
-	
-	
-	
-	
+
 	
 <!-- 	 SCREEN 2. Ask for Name of Player -->
 	<div id="searchScreen" style="display: none;">
@@ -95,11 +91,6 @@
 	
 	
 	
-	
-	
-	
-	
-	
 <!-- 	SCREEN 3 - split between stats and news -->
 	<div id="thirdScreen" style="display: none;">
 		
@@ -114,7 +105,7 @@
 				<button id="getStats" 
 						class="mdc-tab mdc-tab--active" role="tab" aria-selected="true" tabindex="0">
 				  <span class="mdc-tab__content">
-					<span class="mdc-tab__text-label">Player Stats</span>
+					<span class="mdc-tab__text-label">Career Stats</span>
 				  </span>
 				  	 
 				  <span class="mdc-tab-indicator mdc-tab-indicator--active">
@@ -128,7 +119,7 @@
 				<button id="getNews"
 						class="mdc-tab mdc-tab--active" role="tab" aria-selected="true" tabindex="0">
 				  <span class="mdc-tab__content">
-					<span class="mdc-tab__text-label">Player News</span>
+					<span class="mdc-tab__text-label">In The News</span>
 				  </span>
 				  	 
 				  <span class="mdc-tab-indicator mdc-tab-indicator--active">
