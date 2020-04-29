@@ -21,10 +21,10 @@
 }
 
 
-/* img {
-  width: 50%; 
+img {
+  max-width: 100%; 
   height: auto;
-} */
+}
 
 
 
@@ -34,11 +34,14 @@
 }
 .mdc-card {
     width: 50%;
-	max-width: 800px;	
+	max-width: 100%;
+	
 /* 	display: block; */
   margin-left: auto;
   margin-right: auto; 
-	height: auto;
+/* 	height: auto; */
+	height: 500px;
+/* 	min-height: auto; */
 	font-size: 14px;
 	color: #dff9fb;
 	background-color: #2d3436;
