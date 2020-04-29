@@ -35,18 +35,27 @@ img {
 .mdc-card {
     width: 50%;
 	max-width: 100%;
-	
-/* 	display: block; */
+
   margin-left: auto;
   margin-right: auto; 
-/* 	height: auto; */
 	height: 500px;
-/* 	min-height: auto; */
 	font-size: 14px;
 	color: #dff9fb;
-	background-color: #2d3436;
- 
-	
+	background-color: #2d3436; 
+}
+
+@media screen and (max-width: 400px) {
+  .mdc-card {
+    width: 50%;
+	max-width: 100%;
+
+  margin-left: auto;
+  margin-right: auto; 
+	height: 300px;
+	font-size: 14px;
+	color: #dff9fb;
+	background-color: #2d3436; 
+}
 }
 
 .mdc-card__primary-action::before, .mdc-card__primary-action::after{
