@@ -48,14 +48,27 @@ players.forEach(function(v, i, a){
 // hints.innerHTML = 'Tap/click then say a color to change the background color of the app. Try ' + colorHTML + '.';
 
 document.getElementById("microphone").onclick = function() {
+  let p1 = document.createElement("p");
+  p1.textContent = "Listening for player name, say something";
+  document.getElementById("addValuesHere").appendChild(p1);
   recognition.start();
-  console.log('Ready to receive a color command.');
+  console.log('Ready to receive a player name command.');
 }
 
 recognition.onresult = function(event) {
   var player2 = event.results[0][0].transcript;
   console.log(player2);
-	document.getElementById("text-field-hero-input").value = player2; 
+	if(players.includes(player2) ){
+		console.log("inside of here");
+		document.getElementById("text-field-hero-input").value = player2;
+		 document.getElementById("findPlayer").click();
+		
+	}
+	else{
+		let p1 = document.createElement("p");
+		p1.textContent = "Invalid, not a player name, try again";
+		  document.getElementById("addValuesHere").appendChild(p1);
+	}
 //   diagnostic.textContent = 'Result received: ' + player2 + '.';
 //   bg.style.backgroundColor = c;
   console.log('Confidence: ' + event.results[0][0].confidence);
