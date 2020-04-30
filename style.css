@@ -1,6 +1,44 @@
+h1{
+	font-size: 40px;
+	margin-bottom: -10px;
+	font-family: Cinzel Decorative;
+	word-spacing: 80px;
+}
+
+h2{
+	color: #6fb3b8;
+	font-family: Josefin Sans;
+	margin-bottom: 35px;
+	font-size: 35px;
+}
+
+h3{
+	color: #f6f6f2;
+	font-size: 35px;
+	font-family: Josefin Sans; 
+}
+h4{
+	color: #6fb3b8;
+	font-family: Josefin Sans;
+	margin-bottom: 35px;
+	font-size: 25px;
+}
+p{
+	color: #388087;
+	font-size: 15px;
+	font-family: Josefin Sans;
+	margin-bottom: 20px;
+}
+
+body{
+	background-color: #f6f6f2;
+}
+
+
+
+
 #buttonsScreen{
 	display: none;
-/* 	text-align: left; */
 	
 } 
 #buttonScreen.h3{
@@ -20,55 +58,6 @@
 	text-align: center;
 }
 
-
-img {
-  max-width: 100%; 
-  height: auto;
-}
-
-
-
-
-.template{
-	display: none;
-}
-.mdc-card {
-    width: 50%;
-	max-width: 100%;
-
-  margin-left: auto;
-  margin-right: auto; 
-	height: 490px;
-	font-size: 14px;
-	color: #dff9fb;
-	background-color: #2d3436; 
-}
-
-@media screen and (max-width: 400px) {
-  .mdc-card {
-    width: 50%;
-	max-width: 100%;
-
-  margin-left: auto;
-  margin-right: auto; 
-	height: 240px;
-	font-size: 14px;
-	color: #dff9fb;
-	background-color: #2d3436; 
-}
-}
-
-.mdc-card__primary-action::before, .mdc-card__primary-action::after{
- 
-}
-
-
-
-
-
-
-
-
 #infoScreen{
 	text-align: center;	
 	position: fixed;
@@ -77,17 +66,6 @@ img {
   	transform: translate(-50%, -50%); 
 	
 /* 	 Put in the very center of the screen*/
-}
-
-.mdc-button.mdc-button--raised{
-	color:#388087;
-	background-color: #BADFE7;
-	margin-bottom: 10px;
-	margin-top: 10px;
-	font-family: Josefin Sans;
-	font-size: 20px;
-	margin-left: 5px; 
-/* 	width: 70%; */
 }
 #buttons{
 	text-align: center;
@@ -112,20 +90,6 @@ img {
 	font-family: Josefin Sans;
 	font-size: 20px;
 /* 	width: 50%; */
-}
-.mdc-text-field:not(.mdc-text-field--disabled) .mdc-text-field__input{
-	color: #6FB3B8;
-}
-.mdc-text-field__input{
-	size: "50";
-}
-.option{
-	size: 50;
-}
-
-#findNews{
-	color: #dff9fb;
-	background-color: #2d3436;
 }
 #pts{
 	color: #dff9fb;
@@ -153,46 +117,12 @@ img {
 	color: #dff9fb;
 	background-color: #2d3436;
 }
-p{
-	color: #388087;
-	font-size: 15px;
-	font-family: Josefin Sans;
-	margin-bottom: 20px;
-}
+
 
 #playerInfo{
 	color: #f6f6f2; 	
 }
-h1{
-	font-size: 40px;
-	margin-bottom: -10px;
-	font-family: Cinzel Decorative;
-	word-spacing: 80px;
-}
 
-h2{
-	color: #6fb3b8;
-/* 	font-family: Source Code Pro */
-	font-family: Josefin Sans;
-	margin-bottom: 35px;
-	font-size: 35px;
-}
-
-h3{
-	color: #f6f6f2;
-	font-size: 35px;
-	font-family: Josefin Sans; 
-}
-h4{
-	color: #6fb3b8;
-	font-family: Josefin Sans;
-	margin-bottom: 35px;
-	font-size: 25px;
-}
-
-body{
-	background-color: #f6f6f2;
-}
 
 
 #chartArea{
@@ -200,6 +130,117 @@ body{
 	justify-content: center;
 	align-items: center;
 /* 	background-color: #6fb3b8; */
+}
+
+.template{
+	display: none;
+}
+
+
+.img {
+/*   width: 500px; 
+  height: 300px; */
+  max-width: 100%; 
+  height: auto;
+  background-color: #6c5ce7; 
+	margin-left: auto;
+	margin-right: auto; 
+}
+/* img {
+  width: 500px; 
+  height: 300px;
+  background-color: #636e72; 
+} */
+.mdc-card.demo-card{
+	width: 500px; 
+  height: 600px;
+	margin-left: auto;
+	margin-right: auto; 
+}
+/* .mdc-card__primary-action.demo-card__primary-action{
+	width: 500px; 
+  height: 180px;
+} */
+.demo-card__primary{
+	width: 500px; 
+    height: 150px;
+	background-color: #636e72; 
+	margin-left: auto;
+	margin-right: auto; 
+}
+.mdc-card__actions{
+	width: 500px; 
+  	height: 50px;
+	background-color: #636e72; 
+	margin-left: auto;
+	margin-right: auto; 
+	
+}
+.demo-card__secondary.mdc-typography.mdc-typography--body2{
+	width: 500px; 
+  	height: 50px;
+	background-color: #636e72; 
+	margin-left: auto;
+	margin-right: auto; 
+}
+/* .div.demo-card__primary{
+	width: 500px; 
+  height: 400px;
+	
+}
+.div.mdc-card__actions{
+	width: 500px; 
+  	height: 400px;	
+	
+} */
+/* .mdc-card {
+    width: 50%;
+	max-width: 100%;
+	margin-left: auto;
+	margin-right: auto; 
+	height: 490px;
+	font-size: 14px;
+	color: #dff9fb;
+	background-color: #2d3436; 
+}
+
+@media screen and (max-width: 400px) {
+  .mdc-card {
+    width: 50%;
+	max-width: 100%;
+    margin-left: auto;
+    margin-right: auto; 
+	height: 240px;
+	font-size: 14px;
+	color: #dff9fb;
+	background-color: #2d3436; 
+	}
+} */
+
+
+.mdc-button.mdc-button--raised{
+	color:#388087;
+	background-color: #BADFE7;
+	margin-bottom: 10px;
+	margin-top: 10px;
+	font-family: Josefin Sans;
+	font-size: 20px;
+	margin-left: 5px; 
+/* 	width: 70%; */
+}
+.mdc-text-field:not(.mdc-text-field--disabled) .mdc-text-field__input{
+	color: #6FB3B8;
+}
+.mdc-text-field__input{
+	size: "50";
+}
+.option{
+	size: 50;
+}
+
+#findNews{
+	color: #dff9fb;
+	background-color: #2d3436;
 }
 
 :root {
