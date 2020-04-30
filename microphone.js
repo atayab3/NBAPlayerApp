@@ -1,6 +1,15 @@
+
+
+
+//Need to update syntax to ES6
+//Need to add buttons for years and stats pages as well, but might not still deciding
+
+
+
 var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
 var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList
 var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent
+
 
 let players = ["Andrew Wiggins", "Terrence Ross", "DeAndre Jordan", "Jarrett Allen", "Kyle Kuzma", "Joe Harris",
 					"Dejounte Murray", "Bam Adebayo", "Spencer Dinwiddie", "Derrick White", "Zach LaVine", "Danny Green",
@@ -21,76 +30,54 @@ let players = ["Andrew Wiggins", "Terrence Ross", "DeAndre Jordan", "Jarrett All
 				     "Tim Duncan", "Allen Iverson",  "Dwyane Wade",  "Vince Carter", "Dirk Nowitzki", "Shaquille O'Neal", "Kobe Bryant",  "Anthony Davis","James Harden",
 					"Stephen Curry", "Kevin Durant", "LeBron James", "Kawhi Leonard", "Giannis Antetokounmpo"];
 
-// // var colors = [ 'aqua' , 'azure' , 'beige', 'bisque', 'black', 'blue', 'brown', 'chocolate', 'coral' ... ];
- var grammar = '#JSGF V1.0; grammar players; public <player> = ' + players.join(' | ') + ' ;'
+	var grammar = '#JSGF V1.0; grammar players; public <player> = ' + players.join(' | ') + ' ;'
 
-var recognition = new SpeechRecognition();
-var speechRecognitionList = new SpeechGrammarList();
+	var recognition = new SpeechRecognition();
+	var speechRecognitionList = new SpeechGrammarList();
 
-speechRecognitionList.addFromString(grammar, 1);
+	speechRecognitionList.addFromString(grammar, 1);
 // // 
-recognition.grammars = speechRecognitionList;
-recognition.continuous = false;
-recognition.lang = 'en-US';
-recognition.interimResults = false;
-recognition.maxAlternatives = 1;
+	recognition.grammars = speechRecognitionList;
+	recognition.continuous = false;
+	recognition.lang = 'en-US';
+	recognition.interimResults = false;
+	recognition.maxAlternatives = 1;
 
 
-var diagnostic = document.querySelector('.output');
-var bg = document.querySelector('html');
-var hints = document.querySelector('.hints');
+// 	players.forEach(function(v, i, a){
+// 	  console.log("Player for each huh");
+// 	  console.log(v, i);
+// 	});
 
-var colorHTML= '';
-players.forEach(function(v, i, a){
-  console.log(v, i);
-  colorHTML += '<span style="background-color:' + v + ';"> ' + v + ' </span>';
-});
-// hints.innerHTML = 'Tap/click then say a color to change the background color of the app. Try ' + colorHTML + '.';
 
-document.getElementById("microphone").onclick = function() {
-  let p1 = document.createElement("p");
-  p1.textContent = "Listening for player name, say something";
-  document.getElementById("addValuesHere").appendChild(p1);
-  recognition.start();
-  console.log('Ready to receive a player name command.');
-}
 
-recognition.onresult = function(event) {
-  var player2 = event.results[0][0].transcript;
-  console.log(player2);
-	if(players.includes(player2) ){
-		console.log("inside of here");
-		document.getElementById("text-field-hero-input").value = player2;
-		 document.getElementById("findPlayer").click();
-		
-	}
-	else{
-		let p1 = document.createElement("p");
-		p1.textContent = "Invalid, not a player name, try again";
+	document.getElementById("microphone").addEventListener("click", (e)=> {
+		  let p1 = document.createElement("p");
+		  p1.textContent = "Listening for player name, say something";
 		  document.getElementById("addValuesHere").appendChild(p1);
-	}
-//   diagnostic.textContent = 'Result received: ' + player2 + '.';
-//   bg.style.backgroundColor = c;
-  console.log('Confidence: ' + event.results[0][0].confidence);
+		  recognition.start();
+		  console.log('Ready to receive a player name command.');
+	})
+
+recognition.onresult = (e)=> {
+	   let player2 = event.results[0][0].transcript;
+	   console.log(player2);
+		if(players.includes(player2) ){
+			document.getElementById("text-field-hero-input").value = player2;
+			document.getElementById("findPlayer").click();
+		}
+		else{
+			let p1 = document.createElement("p");
+			p1.textContent = "Invalid, not a player name, try again";
+			document.getElementById("addValuesHere").appendChild(p1);
+		}
+
+	  console.log('I got my swag back aka Confidence: ' + event.results[0][0].confidence);
 }
 
-recognition.onspeechend = function() {
+recognition.onspeechend = ()=> {
   recognition.stop();
 }
 
 
-// var diagnostic = document.querySelector('.output');
-// var bg = document.querySelector('html');
-// var hints = document.querySelector('.hints');
 
-// var colorHTML= '';
-// colors.forEach(function(v, i, a){
-//   console.log(v, i);
-//   colorHTML += '<span style="background-color:' + v + ';"> ' + v + ' </span>';
-// });
-// hints.innerHTML = 'Tap/click then say a color to change the background color of the app. Try ' + colorHTML + '.';
-
-// document.body.onclick = function() {
-//   recognition.start();
-//   console.log('Ready to receive a color command.');
-// }
