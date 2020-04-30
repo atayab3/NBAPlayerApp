@@ -306,9 +306,7 @@ addNews = () =>{
 							clone.style.textAlign = "center";
 							clone.style.marginBottom = "20px"; 
 							document.getElementById("addNewsHere").appendChild(clone);
-// 							linebreak = document.createElement("br");
-// 							document.getElementById("addNewsHere").appendChild(linebreak);
-// 							document.getElementById("addNewsHere").appendChild(linebreak);
+
 							articleCount++ ;
 							
 						}
@@ -324,27 +322,16 @@ addNews = () =>{
 
 
 clearNews = () =>{
-// 	console.log(document.getElementById("addNewsHere").querySelectorAll(".mdc-card__primary-action").length ) ;
-// 	console.log("in clearNews1"); 
-// 	console.log(document.getElementById("addNewsHere").querySelectorAll("mdc-card__primary-action demo-card__primary-action").length ) ;
-// 	console.log("in clearNews2"); 
-// 	console.log(document.querySelectorAll(".mdc-card__primary-action demo-card__primary-action").length ) ;
-// 	console.log("in clearNews3"); 
-// 	console.log(document.querySelectorAll("mdc-card__primary-action demo-card__primary-action").length ) ;
-// 	console.log("in clearNews4"); 
-// 	console.log(document.getElementById("addNewsHere").querySelectorAll(".img").length ) ;
-	console.log("in clearNews5"); 
-	console.log(document.getElementById("newsScreen").querySelectorAll("mdc-card demo-card").length ) ;
-// 	console.log("in clearNews6"); 
-// 	console.log(document.querySelectorAll(".img").length ) ;
-// 	console.log("in clearNews7"); 
-// 	console.log(document.querySelectorAll("img").length ) ;
-	for(var i = 0; i < document.getElementById("addNewsHere").querySelectorAll("mdc-card demo-card").length; ++i){
-		console.log(i);
-		let child = document.getElementById("addNewsHere").querySelector("mdc-card demo-card");
-		console.log(child);
-		document.getElementById("addNewsHere").removeChild(child);
-	}
+
+// 	console.log("in clearNews5"); 
+// 	console.log(document.getElementById("newsScreen").querySelectorAll("mdc-card demo-card").length ) ;
+
+// 	for(var i = 0; i < document.getElementById("addNewsHere").querySelectorAll("mdc-card demo-card").length; ++i){
+// 		console.log(i);
+// 		let child = document.getElementById("addNewsHere").querySelector("mdc-card demo-card");
+// 		console.log(child);
+// 		document.getElementById("addNewsHere").removeChild(child);
+// 	}
 	
 }
 
@@ -447,7 +434,6 @@ document.getElementById("getNews").addEventListener("click",  (e)=> {
 	document.querySelector("#buttonsScreen").style.display =  "none";
 	document.querySelector("#newsScreen").style.display =  "block";
 	if(listGenerated == false){
-// 		let years = ["2015", "2016", "2017", "2018", "2019", "2020"];
 		for(var i = 2010 ; i <= 2020; ++i){
 			let dataOption2 = document.createElement("option");
 			dataOption2.value =  i //years[i];
