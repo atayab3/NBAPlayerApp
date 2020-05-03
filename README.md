@@ -1,4 +1,5 @@
 Coded by Adam Tayabali in April/May 2020 
+
 This project was done as my Final Project for IT 202 (Mobile Web Application Development) during the Spring 2020 Semester. The requirements were as follows: 
   UI built using Material Components for the Web;
   Retrieves data from at least two different endpoints;
