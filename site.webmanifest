@@ -1,7 +1,7 @@
 {
 "name":"NBA Progress App",
 "short_name":"NBAStats",
-"start_url": "/index.html",
+"start_url": "./index.html",
 "description": "A app displaying NBA Players stats and news.",
 "icons":
 [{
