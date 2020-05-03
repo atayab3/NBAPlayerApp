@@ -55,6 +55,8 @@ let players = ["Andrew Wiggins", "Terrence Ross", "DeAndre Jordan", "Jarrett All
 		  let p1 = document.createElement("p");
 		  p1.textContent = "Listening for player name, say something";
 		  document.getElementById("addValuesHere").appendChild(p1);
+		
+		
 		  recognition.start();
 		  console.log('Ready to receive a player name command.');
 	})
@@ -72,12 +74,14 @@ recognition.onresult = (e)=> {
 			document.getElementById("addValuesHere").appendChild(p1);
 		}
 
-	  console.log('I got my swag back aka Confidence: ' + event.results[0][0].confidence);
+	  console.log('Confidence: ' + event.results[0][0].confidence);
 }
 
 recognition.onspeechend = ()=> {
   recognition.stop();
 }
 
+
+// <!-- Coded by Adam Tayabali - April 2020 -->
 
 
