@@ -1,8 +1,10 @@
 <!Doctype html>
 <html>
 <head>
-	<!--  Web App Manifest	 -->
+	
+<!--  Web App Manifest	 -->
 	<link rel="manifest" href="site.webmanifest">
+	
 	
 	
 	<meta charset="UTF-8">
@@ -271,7 +273,8 @@
 	
 <script src = "microphone.js">	</script> 
 <script>
-	if ('serviceWorker' in navigator) {
+	
+if ('serviceWorker' in navigator) {
   window.addEventListener('load', function() {
     navigator.serviceWorker.register('./serviceworker.js').then((registration)=> {
       // Registration was successful
@@ -281,7 +284,7 @@
       console.log('ServiceWorker registration failed: ', err);
     });
   });
-}
+}	
 </script> 
 <script src = "ball.js">	</script> 
 
