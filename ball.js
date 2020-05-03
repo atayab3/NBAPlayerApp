@@ -3,7 +3,7 @@ let curSeason = 2019;	//?search=lebron_james - UNDERSCORE WORKS
 
 var statTitles = ["Points", "Rebounds", "Assists", "Field Goal %", "3-Point Field Goal Percentage"];//, "Steals", "Blocks", "FG%", "3Pt FG%" 
 var statVars = ["points", "rebounds", "assists", "fgPercent", "threePercent"];
-
+ 
 var dataArr = [] ; // 2D Array for chart data
 var yearlyPts = []; // the specific stat per year that feeds the 2D Array
 var urlArray = []; // all the urls to fetchALL promise shit
@@ -452,3 +452,6 @@ document.getElementById("getNews").addEventListener("click",  (e)=> {
 	
 })			
 clickedBtn();
+
+
+// <!-- Code by Adam Tayabali - April 2020 -->
