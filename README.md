@@ -1,7 +1,6 @@
 Coded by Adam Tayabali in April/May 2020 
 
 This project was done as my Final Project for IT 202 (Mobile Web Application Development) during the Spring 2020 Semester. The requirements were as follows: 
-
     UI built using Material Components for the Web
   
     Retrieves data from at least two different endpoints;
@@ -20,42 +19,41 @@ Here are some details regarding how I programmed the many parts of this applicat
 
 Material Components: 
 
-The main Material Components for the Web that I used included buttons, text fields, cards, and tab bars.
+    The main Material Components for the Web that I used included buttons, text fields, cards, and tab bars.
 
 APIS:
-To gain stats on various NBA Players - I utilized the BallDontLie Api, an open source project created by ynnadkrap (github username).
 
-Link to info: https://www.balldontlie.io/#introduction
-
-To get player mentions in the NY Times I used their Article Search API. I must stress that the use of this API was for NON-COMMERICAL USE ONLY as I did not profit nor intend to profit from the use of this API. 
-
+    To gain stats on various NBA Players - I utilized the BallDontLie Api, an open source project created by ynnadkrap (github username).
+    Link to info: https://www.balldontlie.io/#introduction
+    To get player mentions in the NY Times I used their Article Search API. I must stress that the use of this API was for NON-COMMERICAL USE ONLY as I did not profit nor intend to profit from the use of this API. 
+    Link to NY Times API: https://developer.nytimes.com/docs/articlesearch-product/1/overview
+    
 Visualizations:
 
-I used Google Charts to form a line chart with the data fetch from the balldontlie statistics api. The x-axis is the year and the y-axis is the stat the user has chosen to view. 
+    I used Google Charts to form a line chart with the data fetch from the balldontlie statistics api. The x-axis is the year and the y-axis is the stat the user has chosen to view. 
+    Line Chart link: https://developers.google.com/chart/interactive/docs/gallery/linechart
 
-Line Chart link: https://developers.google.com/chart/interactive/docs/gallery/linechart
+IndexedDB:
 
-IndexedDB: 
-I used Dexie to store the fetched data regarding individual player statistics into a backend database. This helps because fetching over and over in order to view different stats of the same player resutls in a Too Many Requests Error. I also delete and create a new Dexie DB whenever a new player is searched for.
-
-Link: https://dexie.org/
-
-TO DO :  I plan on deleting the DB less so that I can compare the graphed stats of multiple players.
+    I used Dexie to store the fetched data regarding individual player statistics into a backend database. This helps because fetching over and over in order to view different stats of the same player resutls in a Too Many Requests Error. I also delete and create a new Dexie DB whenever a new player is searched for.
+    Link: https://dexie.org/    
+    TO DO :  I plan on deleting the DB less so that I can compare the graphed stats of multiple players.
 
 Hardware Feature (Microphone):
 
-I utilized the Web Speech API for speech recognition so that users do not have to type the name of the player if they are unaware of the spelling. 
-
-The link tutorial that I followed and learned from is: https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API/Using_the_Web_Speech_API
-
-However, the spoken input only fills up the text field where the player name goes if it is contained in a list I created of most popular NBA players. I generated the datalist by putting NBA Legends from the early 2000s as well the top 100 players of the 2020 season according to Sports Illustrated.
-SI Link to article: https://www.si.com/nba/2019/09/12/top-100-nba-players-2020
+    I utilized the Web Speech API for speech recognition so that users do not have to type the name of the player if they are unaware of the spelling. 
+    The link tutorial that I followed and learned from is: https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API/Using_the_Web_Speech_API
+    
+    However, the spoken input only fills up the text field where the player name goes if it is contained in a list I created of most popular NBA players. I generated the datalist by putting NBA Legends from the early 2000s as well the top 100 players of the 2020 season according to Sports Illustrated.
+    SI Link to article: https://www.si.com/nba/2019/09/12/top-100-nba-players-2020
 
 Service Worker: 
-We learned about using Service Workers in a lecture by Professor David Hayes on 04/08/2020, in which the following tutorial was discussed: https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Offline_Service_workers
+   
+    We learned about using Service Workers in a lecture by Professor David Hayes on 04/08/2020, in which the following tutorial was discussed: https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Offline_Service_workers
 
 Web App Manifest:
-Learned about creating Web App Manifest at: https://developer.mozilla.org/en-US/docs/Web/Manifest
+
+    Learned about creating Web App Manifest at: https://developer.mozilla.org/en-US/docs/Web/Manifest
 
 
 
