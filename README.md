@@ -1,6 +1,7 @@
 Coded by Adam Tayabali in April/May 2020 
 
 This project was done as my Final Project for IT 202 (Mobile Web Application Development) during the Spring 2020 Semester. The requirements were as follows: 
+   
     UI built using Material Components for the Web
   
     Retrieves data from at least two different endpoints;
@@ -67,7 +68,6 @@ Overview of ball.js code:
     turnDBtoArray() which default is called and uses the DB to make an 2D array and chart for years and points.
     If another button for a different stat is clicked then turnDBtoArray() is clicked but now generates a different graph
 
-
     Sections for News Searches and NYTIMES API
     
     If Search Again is clicked the DB are deleted and re-enable the find Player button as well as clear the text field where players names were.
@@ -80,10 +80,7 @@ TO DO LIST (for Summer Months) :
     Visualize mic turning off and on with green and red colors
     getting clearNews function to work 
     Find a secondary way to improve dataList names because it only includes 120 of the most pop players ATM .
-//Searches for name with underscore
-// creates URLs for each api endpoint year, up til 2000
-// returns 2D array of years - points 
-// uses that to make a line chart for the statistic
+
     
     
     
