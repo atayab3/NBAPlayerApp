@@ -8,7 +8,6 @@ var urlsToCache = [
   './',
   './style.css',
    './ball.js',
-	'./site.webmanifest',
 	'https://unpkg.com/material-components-web@v4.0.0/dist/material-components-web.min.css',
 	'https://fonts.googleapis.com/css?family=Roboto Condensed|Josefin Sans|Cinzel Decorative|Source Code Pro|News Cycle'
 	
