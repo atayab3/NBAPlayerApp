@@ -3,23 +3,39 @@ Coded by Adam Tayabali in April/May 2020
 This project was done as my Final Project for IT 202 (Mobile Web Application Development) during the Spring 2020 Semester. The requirements were as follows: 
 
   UI built using Material Components for the Web
+  
   Retrieves data from at least two different endpoints;
+  
   Includes a visualization (map, chart, or ?);
+  
   Stores and retrieves data from the IndexedDB;
+  
   Utilizes some hardware feature (sensor, camera, microphone, etc);
+  
   Includes a Service Worker;-----Functions offline (due to cached assets);
+  
   Installs on device (due to Web App Manifest)
 
 Here are some details regarding how I programmed the many parts of this application.
+
 Material Components: 
+
 The main Material Components for the Web that I used included buttons, text fields, cards, and tab bars.
 
 APIS:
 To gain stats on various NBA Players - I utilized the BallDontLie Api, an open source project created by ynnadkrap (github username).
+
 Link to info: https://www.balldontlie.io/#introduction
 
+To get player mentions in the NY Times I used their Article Search API. I must stress that the use of this API was for NON-COMMERICAL USE ONLY as I did not profit nor intend to profit from the use of this API. 
 
-To get player mentions in the NY Times I used their Article Search API. I must stress that the use of 
+Visualizations:
+
+I used Google Charts to form a line chart with the data fetch from the balldontlie statistics api. The x-axis is the year and the y-axis is the stat the user has chosen to view. 
+
+Line Chart link: https://developers.google.com/chart/interactive/docs/gallery/linechart
+
+
 
 
 
