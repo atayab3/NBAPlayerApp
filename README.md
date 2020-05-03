@@ -57,6 +57,41 @@ Web App Manifest:
 
 
 
+Overview of ball.js code: 
+
+    Takes in user input and replaces any spaces with an underscore so that it can be searchable with the ball dont lie API.
+    Creates the url/API endpoint and calls
+    getUrls()  returns array of URLS with a specific player(ID) from the 1996 all the way to 2020 and then call
+    fetchData() which uses Promise.all to fetch multiple requests from the urlsArray and then call
+    For every request that does not return undefined add player info and stats to DataBase, then call
+    turnDBtoArray() which default is called and uses the DB to make an 2D array and chart for years and points.
+    If another button for a different stat is clicked then turnDBtoArray() is clicked but now generates a different graph
+
+
+    Sections for News Searches and NYTIMES API
+    
+    If Search Again is clicked the DB are deleted and re-enable the find Player button as well as clear the text field where players names were.
+    
+    
+TO DO LIST (for Summer Months) : 
+    
+    Fix image view on demo-cards.
+    Ask user for permissions regarding Microphone
+    Visualize mic turning off and on with green and red colors
+    getting clearNews function to work 
+    Find a secondary way to improve dataList names because it only includes 120 of the most pop players ATM .
+//Searches for name with underscore
+// creates URLs for each api endpoint year, up til 2000
+// returns 2D array of years - points 
+// uses that to make a line chart for the statistic
+    
+    
+    
+    
+    
+    
+    
+    
 ### Getting started
 There are various things you can do to quickly and efficiently configure your Codio Box to your exact requirements. 
 
