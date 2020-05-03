@@ -81,5 +81,7 @@ self.addEventListener('activate', function(event) {
 
 
 
+//<!-- Code by Adam Tayabali - April 2020 -->
+
 
 
