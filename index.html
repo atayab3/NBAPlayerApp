@@ -270,7 +270,19 @@
 	
 	
 <script src = "microphone.js">	</script> 
-<script src = "serviceworker.js">	</script> 
+<script>
+	if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/serviceworker.js').then((registration)=> {
+      // Registration was successful
+      console.log('ServiceWorker registration successful with scope: ', registration.scope);
+    }, (err)=> {
+      // registration failed :(
+      console.log('ServiceWorker registration failed: ', err);
+    });
+  });
+}
+</script> 
 <script src = "ball.js">	</script> 
 
 </body>
