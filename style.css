@@ -138,29 +138,25 @@ body{
 
 
 .img {
-/*   width: 500px; 
-  height: 300px; */
-  max-width: 100%; 
-  height: auto;
-  background-color: #6c5ce7; 
-	margin-left: auto;
-	margin-right: auto; 
+
 }
-/* img {
-  width: 500px; 
-  height: 300px;
-  background-color: #636e72; 
-} */
+
 .mdc-card.demo-card{
 	width: 500px; 
-  height: 600px;
+  	height: 600px;
 	margin-left: auto;
 	margin-right: auto; 
+	background-color: #2d3436;
 }
+/* .mdc-card__actions{
+
+	background-color: #2d3436; 
+	
+} */
 /* .mdc-card__primary-action.demo-card__primary-action{
 	width: 500px; 
   height: 180px;
-} */
+} 
 .demo-card__primary{
 	width: 500px; 
     height: 150px;
@@ -168,14 +164,7 @@ body{
 	margin-left: auto;
 	margin-right: auto; 
 }
-.mdc-card__actions{
-	width: 500px; 
-  	height: 50px;
-	background-color: #636e72; 
-	margin-left: auto;
-	margin-right: auto; 
-	
-}
+
 .demo-card__secondary.mdc-typography.mdc-typography--body2{
 	width: 500px; 
   	height: 50px;
@@ -183,6 +172,7 @@ body{
 	margin-left: auto;
 	margin-right: auto; 
 }
+*/
 /* .div.demo-card__primary{
 	width: 500px; 
   height: 400px;
@@ -225,7 +215,8 @@ body{
 	margin-top: 10px;
 	font-family: Josefin Sans;
 	font-size: 20px;
-	margin-left: 5px; 
+	margin-left: 5px;
+
 /* 	width: 70%; */
 }
 .mdc-text-field:not(.mdc-text-field--disabled) .mdc-text-field__input{
