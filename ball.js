@@ -64,6 +64,7 @@ createDataChart = (stringStat)=>{
 					 firstName = json.data[0]["first_name"]; 
 					 lastName = json.data[0]["last_name"];
 					 playerName = json.data[0]["first_name"] + " " + json.data[0]["last_name"];
+					 console.log("Is it kobe?" + playerName);
 					 createPlayerInfoBox(playerName);
 					 
 					 playerTeam = json.data[0]["team"]["full_name"];
@@ -278,7 +279,16 @@ addNews = () =>{
 							console.log(clone);
 // 							<img src="https://www.your-image-source.com/your-image.jpg">
 // 							console.log(json["response"]["docs"][i]["multimedia"][0]["url"]);
-							clone.querySelector("img").src = "https://static01.nyt.com/" + json["response"]["docs"][i]["multimedia"][0]["url"] ; 
+// 							//		url(&quot;https://material-components.github.io/material-components-web-catalog/static/media/photos/3x2/2.jpg&quot;);">
+
+// 							let urlBack = 'url( &quot;https://static01.nyt.com/&quot; + json["response"]["docs"][i]["multimedia"][0]["url"] )' ;
+// 							
+							let newPic = "https://static01.nyt.com/" + json["response"]["docs"][i]["multimedia"][0]["url"];
+							console.log(newPic);
+				
+							clone.getElementsByClassName("mdc-card__media")[0]
+								.style.backgroundImage = "url('" + newPic + "')" ; //"https://static01.nyt.com/" + json["response"]["docs"][i]["multimedia"][0]["url"] ;
+							
 							clone.querySelector("h2").textContent = json["response"]["docs"][i]["headline"]["main"];
 							clone.querySelector("h2").style.color = "white";
 							clone.querySelector("h2").style.fontFamily = "News Cycle";
@@ -434,14 +444,14 @@ document.getElementById("getNews").addEventListener("click",  (e)=> {
 	document.querySelector("#buttonsScreen").style.display =  "none";
 	document.querySelector("#newsScreen").style.display =  "block";
 	if(listGenerated == false){
-		for(var i = 2010 ; i <= 2020; ++i){
+		for(var i = 2010 ; i <= 2019; ++i){
 			let dataOption2 = document.createElement("option");
 			dataOption2.value =  i //years[i];
 			document.getElementById("years").appendChild(dataOption2);
 		}
 		listGenerated = true;
 		
-		let opener = document.createElement('p');
+		let opener = document.getElementById("mentions"); 
 		opener.textContent = "Mentions of "+ playerName + " in the New York Times";
 		opener.style.color = "white"; 
 		opener.style.textAlign = "center";
