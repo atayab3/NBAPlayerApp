@@ -104,8 +104,8 @@ createDataChart = (stringStat)=>{
 		 
 		 
 				 else{ // 	if json is more than one, give user a list of options
-					 console.log("Multiple players with this name exist, further action required");	
-					
+					 console.log("Multiple players with this name exist, further action required. Pick one!");	
+// 					 for(int i = 0 ; i < )
 				 }
 		})		
 }
@@ -324,7 +324,7 @@ addNews = () =>{
 					}
 					if(articleCount == 0){
 						let result = document.createElement('p');
-						result.textContent = "No New York Times articles related to "+ playerName + "in the year " + chosenYear;
+						result.textContent = "No New York Times articles related to "+ playerName + " in the year " + chosenYear;
 						result.style.color = "white"; 
 						document.getElementById("addNewsHere").appendChild( result );
 					}
