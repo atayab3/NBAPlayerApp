@@ -242,7 +242,8 @@ drawChart = ()=> {
         var data = google.visualization.arrayToDataTable(dataArr);
 
         var options = {
-          title: playerName + " " + statTitle + " Per Game over the Seasons",
+		
+          title: playerName + " " + statTitle + " Per Game over his Career",
           legend: { position: 'bottom' },
 		  vAxis: vAxis2,
 		  pointSize: 5,
@@ -432,6 +433,7 @@ document.getElementById("searchAgain2").addEventListener("click",  (e)=> {
 
 
 //Event Handlers for Tabs 
+//
 document.getElementById("getStats").addEventListener("click",  (e)=> {
 	document.querySelector("#newsScreen").style.display =  "none";
 	document.querySelector("#buttonsScreen").style.display =  "block";
@@ -464,4 +466,4 @@ document.getElementById("getNews").addEventListener("click",  (e)=> {
 clickedBtn();
 
 
-// <!-- Code by Adam Tayabali - April 2020 -->
+// <!-- Code by Adam Tayabali - May 2020 -->
