@@ -1,21 +1,23 @@
 h1{
 	font-size: 40px;
 	margin-bottom: -10px;
-	font-family: Cinzel Decorative;
-	word-spacing: 80px;
+	font-family: Fira Sans;
+	word-spacing: 10px;
+	letter-spacing: 3px;
 }
 
 h2{
-	color: #6fb3b8;
+/* 	color: #6fb3b8; */
+	color: white;
 	font-family: Josefin Sans;
 	margin-bottom: 35px;
-	font-size: 35px;
+	font-size: 45px;
 }
 
 h3{
-	color: #f6f6f2;
+	color: #fff;
 	font-size: 35px;
-	font-family: Josefin Sans; 
+	font-family: Fira Sans; 
 }
 h4{
 	color: #6fb3b8;
@@ -24,16 +26,29 @@ h4{
 	font-size: 25px;
 }
 p{
-	color: #388087;
-	font-size: 15px;
+	color: #fff;
+	font-weight: bold;
+	letter-spacing: 2px;
+	font-size: 22px;
 	font-family: Josefin Sans;
 	margin-bottom: 20px;
 }
-
-body{
-	background-color: #f6f6f2;
+.helpAd h3{
+	text-align: center;
 }
+body{
+	background-color: #A8D0E6;
+}
+#infoScreen {
+	text-align: center;	
+	position: fixed;
+    top: 50%;
+    left: 50%;
+  	transform: translate(-50%, -50%); 
+/* 	background-color: #A8D0E6; */
 
+/* 	 Put in the very center of the screen*/
+}
 
 
 
@@ -56,16 +71,13 @@ body{
 	color: #dff9fb;	
 	background-color: #2d3436;	
 	text-align: center;
+	margin-left: 35px;
 }
 
-#infoScreen{
-	text-align: center;	
-	position: fixed;
-    top: 50%;
-    left: 50%;
-  	transform: translate(-50%, -50%); 
-	
-/* 	 Put in the very center of the screen*/
+.mdc-tab{
+	font-size: 25px;
+	font-family: Fira Sans;
+	font-weight: bold;
 }
 #buttons{
 	text-align: center;
@@ -76,15 +88,11 @@ body{
 /* 	 does not center graph for some reason */
 	text-align: center;
 }
-#curve_chart{
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
+
 
 #goSearch{
-	color: #388087;
-	background-color: #BADFE7;
+	background-color: #388087;
+	color: #BADFE7;
 	margin-bottom: 25px;
 	margin-top: 25px;
 	font-family: Josefin Sans;
@@ -116,9 +124,90 @@ body{
 #searchAgain{
 	color: #dff9fb;
 	background-color: #2d3436;
+	margin-left: 195px;
+	margin-top: 25px;
+}
+path{
+	stroke: #dff9fb;
+	stroke-width: 2; 
+/* 	fill: #2d3436; */
+}
+circle{
+	fill: #dff9fb; 
+}
+rect{
+/* 	background-color: #2d3436; */
+	fill: #2d3436;
+	color: white; 
+	font-size: 25px;
+}
+#curve_chart{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+/* 	height: 450px;
+	width: 25%;  */
+}
+@media (max-width:500px){ 
+/* 	 500 px wide or less*/
+	h2{
+		font-size: 36px;
+	}
+	h3{
+		font-size: 20px;
+		font-family: Fira Sans;
+		font-weight: bold;
+	}
+	p{
+		font-size: 16px;
+	}
+	#curvechart{
+		height: 100%;
+		width: 100%;  
+	}
+	rect{
+		width: 100%;
+	}
+	text{
+	fill: gray;
+/* 	background: red; */
+}
+	.mdc-tab{
+		font-size: 15px;
+	font-family: Fira Sans;
+	font-weight: bold;
+	}
+	#searchAgain{
+	color: #dff9fb;
+	background-color: #2d3436;
+	margin-left: 50px;
+	margin-top: 25px;
+}
 }
 
+@media (min-width:500px){
+	h3{
+/* 		color: red; */
+	}
+	#curvechart{
+		height: 400px;
+		width: 600px;  
+	}
+	rect{
+		width: 600px;
+		height: 400px
+	}
+	text{
+	fill: #dff9fb;
+		background: red;
+}
+	
+}
 
+text{
+	fill: #dff9fb;
+	background: red;
+}
 #playerInfo{
 	color: #f6f6f2; 	
 }
@@ -129,6 +218,8 @@ body{
 	 display: flex;
 	justify-content: center;
 	align-items: center;
+/* 		background-color: #2d3436; */
+
 /* 	background-color: #6fb3b8; */
 }
 
@@ -150,49 +241,6 @@ body{
 }
 /* .mdc-card__actions{
 
-	background-color: #2d3436; 
-	
-} */
-/* .mdc-card__primary-action.demo-card__primary-action{
-	width: 500px; 
-  height: 180px;
-} 
-.demo-card__primary{
-	width: 500px; 
-    height: 150px;
-	background-color: #636e72; 
-	margin-left: auto;
-	margin-right: auto; 
-}
-
-.demo-card__secondary.mdc-typography.mdc-typography--body2{
-	width: 500px; 
-  	height: 50px;
-	background-color: #636e72; 
-	margin-left: auto;
-	margin-right: auto; 
-}
-*/
-/* .div.demo-card__primary{
-	width: 500px; 
-  height: 400px;
-	
-}
-.div.mdc-card__actions{
-	width: 500px; 
-  	height: 400px;	
-	
-} */
-/* .mdc-card {
-    width: 50%;
-	max-width: 100%;
-	margin-left: auto;
-	margin-right: auto; 
-	height: 490px;
-	font-size: 14px;
-	color: #dff9fb;
-	background-color: #2d3436; 
-}
 
 @media screen and (max-width: 400px) {
   .mdc-card {
@@ -216,8 +264,6 @@ body{
 	font-family: Josefin Sans;
 	font-size: 20px;
 	margin-left: 5px;
-
-/* 	width: 70%; */
 }
 .mdc-text-field:not(.mdc-text-field--disabled) .mdc-text-field__input{
 	color: #6FB3B8;
