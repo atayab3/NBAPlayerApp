@@ -3,8 +3,7 @@ h1{
 	margin-bottom: -10px;
 	font-family: Fira Sans;
 	word-spacing: 10px;
-	letter-spacing: 3px; 
-	
+	letter-spacing: 3px;
 }
 
 h2{
@@ -335,4 +334,4 @@ text{
     --mdc-theme-primary: #f5f6fa;
 }
 
-/*  <!-- Code by Adam Tayabali - April/May 2020 --> */
+/*  <!-- Code by Adam Tayabali - April 2020 --> */
