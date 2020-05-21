@@ -466,4 +466,4 @@ document.getElementById("getNews").addEventListener("click",  (e)=> {
 clickedBtn();
 
 
-// <!-- Code by Adam Tayabali - April 2020 -->
+// <!-- Code by Adam Tayabali - April/May 2020 -->
