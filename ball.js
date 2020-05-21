@@ -422,7 +422,7 @@ document.getElementById("searchAgain2").addEventListener("click",  (e)=> {
 			console.log("search Again 2 button clicked");
 			Dexie.delete('stats_database');
 			document.getElementById("findPlayer").disabled = false;
-			document.body.style.backgroundColor = "#f6f6f2";
+			document.body.style.backgroundColor = "#A8D0E6";
 			
 			document.getElementById("text-field-hero-input").value = "";
 			document.querySelector("#thirdScreen").style.display =  "none";
@@ -466,4 +466,4 @@ document.getElementById("getNews").addEventListener("click",  (e)=> {
 clickedBtn();
 
 
-// <!-- Code by Adam Tayabali - April/May 2020 -->
+// <!-- Code by Adam Tayabali - April 2020 -->
