@@ -257,7 +257,7 @@ drawChart = ()=> {
 
 // 		NOTES
 addNews = () =>{			
-			let chosenYear = document.getElementById("text-field-year").value;
+			let chosenYear = document.getElementById("text-field-year2").value;
 			let startDate = chosenYear + "0101"
 			let endDate = chosenYear + "1231";
 
