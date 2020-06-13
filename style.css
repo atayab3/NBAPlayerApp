@@ -7,7 +7,8 @@ h1{
 }
 
 h2{
-/* 	color: #6fb3b8; */
+/*   text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000; */
+
 	color: white;
 	font-family: Josefin Sans;
 	margin-bottom: 35px;
@@ -15,6 +16,8 @@ h2{
 }
 
 h3{
+/* 		  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000; */
+
 	color: #fff;
 	font-size: 35px;
 	font-family: Fira Sans; 
@@ -31,6 +34,8 @@ h4{
 	font-size: 25px;
 }
 p{
+/* 	  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000; */
+
 	color: #fff;
 	font-weight: bold;
 	letter-spacing: 2px;
@@ -186,7 +191,7 @@ rect{
 	font-family: Fira Sans; 
 }
 	.mdc-text-field:not(.mdc-text-field--disabled) .mdc-text-field__input {
-    color: #388087;
+    color: black;
     font-size: 25px;
     width: 345px;
 }
@@ -314,7 +319,7 @@ text{
 	font-size: 20px;
 }
 .mdc-text-field:not(.mdc-text-field--disabled) .mdc-text-field__input{
-	color: #388087;
+	color: black;
 	font-size: 25px;
 	width: 360px;
 }
